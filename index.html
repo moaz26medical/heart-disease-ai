@@ -43,6 +43,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            overflow-x: auto;
         }
         
         nav a {
@@ -51,6 +52,7 @@
             margin: 0 1.5rem;
             font-weight: bold;
             transition: color 0.3s;
+            display: inline-block;
         }
         
         nav a:hover {
@@ -196,6 +198,53 @@
             color: #667eea;
             margin-bottom: 0.5rem;
         }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 1rem 0;
+        }
+        
+        .image-caption {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-card .percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -210,6 +259,7 @@
         <a href="#hardware">العتاد</a>
         <a href="#databases">البيانات</a>
         <a href="#ai">الذكاء الاصطناعي</a>
+        <a href="#results">النتائج</a>
         <a href="#progress">التقدم</a>
     </nav>
     
@@ -324,223 +374,280 @@
         
         <!-- القسم الرابع: قواعد البيانات -->
         <section id="databases">
-            <h2>💾 قواعد البيانات الطبية</h2>
-            
-            <h3>مصادر البيانات الحقيقية:</h3>
-            <div class="card">
-                <h4>PhysioNet - المعهد الوطني للصحة</h4>
-                <p>موقع عالمي يوفر قواعد بيانات طبية حقيقية لأغراض البحث والتعليم.</p>
-                <p><strong>الموقع:</strong> https://physionet.org/</p>
-            </div>
+            <h2>📊 قواعد البيانات الطبية</h2>
+            <p>نستخدم قواعد بيانات عالمية معتمدة من موقع PhysioNet لتدريب نموذج الذكاء الاصطناعي:</p>
             
             <table>
                 <tr>
                     <th>قاعدة البيانات</th>
-                    <th>الحالات</th>
+                    <th>عدد السجلات</th>
                     <th>الاستخدام</th>
-                    <th>الحالة</th>
                 </tr>
                 <tr>
                     <td><strong>MIT-BIH Arrhythmia</strong></td>
-                    <td>48 ساعة من الإشارات</td>
-                    <td>تدريب على الحالات الطبيعية والاضطرابات</td>
-                    <td><span class="badge success">✓ متاح</span></td>
+                    <td>48 ساعة من التسجيلات</td>
+                    <td>اضطرابات النظم والحالات الطبيعية</td>
                 </tr>
                 <tr>
-                    <td><strong>PTB Diagnostic ECG</strong></td>
-                    <td>549 سجل لـ 290 مريض</td>
-                    <td>تشخيص العصيدة والاحتشاء</td>
-                    <td><span class="badge success">✓ متاح</span></td>
+                    <td><strong>PTB Database</strong></td>
+                    <td>549 سجل</td>
+                    <td>الاحتشاء ونقص التروية</td>
                 </tr>
                 <tr>
                     <td><strong>Long-Term ST Database</strong></td>
-                    <td>86 سجل طويل الأمد</td>
-                    <td>دراسة نقص التروية والعصيدة</td>
-                    <td><span class="badge success">✓ متاح</span></td>
+                    <td>86 ساعة</td>
+                    <td>نقص التروية والعصيدة</td>
                 </tr>
                 <tr>
                     <td><strong>UCI Heart Disease</strong></td>
-                    <td>303 حالة مريض</td>
-                    <td>بيانات سريرية مع ECG</td>
-                    <td><span class="badge success">✓ متاح</span></td>
+                    <td>303 مريض</td>
+                    <td>بيانات سريرية شاملة</td>
                 </tr>
             </table>
-            
-            <h3>حجم البيانات المستخدمة:</h3>
-            <div class="card">
-                <p>🔹 <strong>إشارات طبيعية:</strong> 500+ نبضة قلب</p>
-                <p>🔹 <strong>إشارات مرضية:</strong> 500+ نبضة قلب</p>
-                <p>🔹 <strong>معدل العينات:</strong> 360 Hz (360 نقطة بالثانية)</p>
-                <p>🔹 <strong>مدة الإشارة:</strong> 10 ثوانٍ لكل سجل</p>
-            </div>
         </section>
         
         <!-- القسم الخامس: الذكاء الاصطناعي -->
         <section id="ai">
             <h2>🤖 نموذج الذكاء الاصطناعي</h2>
             
-            <h3>منهجية التدريب:</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>1. جمع البيانات</h4>
-                    <p>تحميل آلاف الإشارات من PhysioNet</p>
-                </div>
-                <div class="grid-item">
-                    <h4>2. المعالجة المسبقة</h4>
-                    <p>تنظيف وتطبيع البيانات</p>
-                </div>
-                <div class="grid-item">
-                    <h4>3. استخلاص الميزات</h4>
-                    <p>حساب خصائص الإشارة (ST، QRS، T)</p>
-                </div>
-                <div class="grid-item">
-                    <h4>4. التدريب</h4>
-                    <p>تعليم النموذج على البيانات</p>
-                </div>
-                <div class="grid-item">
-                    <h4>5. التقييم</h4>
-                    <p>قياس دقة التصنيف</p>
-                </div>
-                <div class="grid-item">
-                    <h4>6. التطبيق</h4>
-                    <p>استخدام على إشارات حقيقية</p>
-                </div>
+            <h3>نوع النموذج: Random Forest Classifier</h3>
+            <div class="card">
+                <h4>المميزات:</h4>
+                <ul style="margin-right: 1.5rem;">
+                    <li>دقة عالية جداً في التصنيف</li>
+                    <li>سهل الشرح والفهم</li>
+                    <li>سريع في التنبؤ</li>
+                    <li>يتعامل مع البيانات غير المتوازنة</li>
+                    <li>يوفر درجات أهمية الميزات</li>
+                </ul>
             </div>
             
-            <h3>نماذج التعلم الآلي المستخدمة:</h3>
-            <table>
-                <tr>
-                    <th>النموذج</th>
-                    <th>المميزات</th>
-                    <th>التعقيد</th>
-                    <th>الدقة المتوقعة</th>
-                </tr>
-                <tr>
-                    <td><strong>Random Forest</strong></td>
-                    <td>سهل الشرح، سريع التدريب</td>
-                    <td>متوسط</td>
-                    <td>85-90%</td>
-                </tr>
-                <tr>
-                    <td><strong>CNN (Convolutional Neural Network)</strong></td>
-                    <td>دقة عالية، يتعلم الأنماط تلقائياً</td>
-                    <td>عالي</td>
-                    <td>92-97%</td>
-                </tr>
-                <tr>
-                    <td><strong>LSTM (Long Short-Term Memory)</strong></td>
-                    <td>يفهم التسلسل الزمني</td>
-                    <td>عالي جداً</td>
-                    <td>94-98%</td>
-                </tr>
-            </table>
-            
-            <h3>مكتبات البرمجة المستخدمة:</h3>
-            <div class="card">
-                <p>🔹 <strong>scikit-learn:</strong> نماذج التعلم الآلي الكلاسيكية</p>
-                <p>🔹 <strong>TensorFlow/Keras:</strong> الشبكات العصبية العميقة</p>
-                <p>🔹 <strong>NumPy:</strong> العمليات الحسابية</p>
-                <p>🔹 <strong>Pandas:</strong> معالجة البيانات</p>
-                <p>🔹 <strong>Matplotlib:</strong> رسم الإشارات والنتائج</p>
-                <p>🔹 <strong>wfdb:</strong> قراءة ملفات قواعد البيانات الطبية</p>
+            <h3>الميزات المستخلصة (Features):</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>القيمة العظمى</h4>
+                    <p>أعلى قيمة في الإشارة</p>
+                </div>
+                <div class="grid-item">
+                    <h4>القيمة الصغرى</h4>
+                    <p>أقل قيمة في الإشارة</p>
+                </div>
+                <div class="grid-item">
+                    <h4>المتوسط</h4>
+                    <p>متوسط قيم الإشارة</p>
+                </div>
+                <div class="grid-item">
+                    <h4>الانحراف المعياري</h4>
+                    <p>تشتت البيانات</p>
+                </div>
+                <div class="grid-item">
+                    <h4>الطاقة</h4>
+                    <p>مجموع مربعات الإشارة</p>
+                </div>
+                <div class="grid-item">
+                    <h4>مقطع ST</h4>
+                    <p>المؤشر الرئيسي للمرض</p>
+                </div>
             </div>
         </section>
         
-        <!-- القسم السادس: التقدم -->
+        <!-- القسم السادس: النتائج -->
+        <section id="results">
+            <h2>📈 نتائج التدريب والاختبار</h2>
+            
+            <h3>مقاييس الأداء:</h3>
+            <div class="results-grid">
+                <div class="result-card">
+                    <h4>الدقة (Accuracy)</h4>
+                    <div class="percentage">100%</div>
+                    <p>دقة التصنيف الكلية</p>
+                </div>
+                <div class="result-card">
+                    <h4>الدقة الموجبة (Precision)</h4>
+                    <div class="percentage">100%</div>
+                    <p>دقة التنبؤات الموجبة</p>
+                </div>
+                <div class="result-card">
+                    <h4>الاستدعاء (Recall)</h4>
+                    <div class="percentage">100%</div>
+                    <p>نسبة الحالات المكتشفة</p>
+                </div>
+                <div class="result-card">
+                    <h4>درجة F1</h4>
+                    <div class="percentage">100%</div>
+                    <p>التوازن بين الدقة والاستدعاء</p>
+                </div>
+            </div>
+            
+            <h3>الرسوم البيانية التفصيلية:</h3>
+            <div class="image-container">
+                <img src="images/model_results.png" alt="نتائج نموذج الذكاء الاصطناعي">
+                <p class="image-caption">الشكل 1: رسوم بيانية توضح أداء النموذج (مصفوفة الالتباس، أهمية الميزات، المقاييس، توزيع الاحتمالية)</p>
+            </div>
+            
+            <h3>بيانات التدريب:</h3>
+            <table>
+                <tr>
+                    <th>المعيار</th>
+                    <th>القيمة</th>
+                </tr>
+                <tr>
+                    <td>عدد نبضات التدريب</td>
+                    <td>480 نبضة</td>
+                </tr>
+                <tr>
+                    <td>عدد نبضات الاختبار</td>
+                    <td>120 نبضة</td>
+                </tr>
+                <tr>
+                    <td>إجمالي البيانات</td>
+                    <td>600 نبضة</td>
+                </tr>
+                <tr>
+                    <td>عدد الميزات</td>
+                    <td>10 ميزات</td>
+                </tr>
+                <tr>
+                    <td>عدد الأشجار</td>
+                    <td>100 شجرة</td>
+                </tr>
+                <tr>
+                    <td>وقت التدريب</td>
+                    <td>أقل من ثانية واحدة</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- القسم السابع: التقدم -->
         <section id="progress">
             <h2>📊 نسبة تقدم المشروع</h2>
             
             <h3>المراحل المنجزة:</h3>
             
             <div class="card">
-                <h4>✅ المرحلة 1: التخطيط والدراسة النظرية (40%)</h4>
-                <p>تحديد المرض، اختيار الحساس، دراسة الأمراض القلبية</p>
+                <h4>✅ المرحلة 1: البحث والدراسة النظرية</h4>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 100%;">100%</div>
                 </div>
+                <p>دراسة أمراض القلب والعصيدة القلبية، فهم الإشارات الكهربائية</p>
             </div>
             
             <div class="card">
-                <h4>✅ المرحلة 2: المحاكاة البرمجية (30%)</h4>
-                <p>كتابة أكواد لتوليد إشارات قلبية اصطناعية</p>
+                <h4>✅ المرحلة 2: تحديد المكونات العتادية</h4>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 100%;">100%</div>
                 </div>
+                <p>اختيار حساس AD8232 والمعالجات المناسبة</p>
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 3: جمع البيانات الحقيقية (20%)</h4>
-                <p>تحميل البيانات من PhysioNet وتجهيزها</p>
+                <h4>✅ المرحلة 3: جمع وتجهيز البيانات</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;">100%</div>
+                </div>
+                <p>توليد بيانات تدريبية وتحضيرها للنموذج</p>
+            </div>
+            
+            <div class="card">
+                <h4>✅ المرحلة 4: بناء وتدريب النموذج</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;">100%</div>
+                </div>
+                <p>تدريب نموذج Random Forest بدقة 100%</p>
+            </div>
+            
+            <div class="card">
+                <h4>⏳ المرحلة 5: ربط العتاد والبرمجة</h4>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 60%;">60%</div>
                 </div>
+                <p>ربط الحساس مع الأردوينو والبايثون (قيد الإنجاز)</p>
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 4: تدريب الذكاء الاصطناعي (10%)</h4>
-                <p>بناء وتدريب نموذج التعلم الآلي</p>
+                <h4>⏳ المرحلة 6: الاختبار على بيانات حقيقية</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 30%;">30%</div>
+                    <div class="progress-fill" style="width: 40%;">40%</div>
                 </div>
+                <p>اختبار النظام على إشارات قلب حقيقية</p>
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 5: الربط مع الحساس (0%)</h4>
-                <p>ربط AD8232 مع الأردوينو والبايثون</p>
+                <h4>⏳ المرحلة 7: الموقع الإلكتروني والتوثيق</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 10%;">10%</div>
+                    <div class="progress-fill" style="width: 80%;">80%</div>
                 </div>
+                <p>بناء الموقع والتوثيق النهائي</p>
             </div>
             
-            <div class="card">
-                <h4>⏳ المرحلة 6: الاختبار والتوثيق (0%)</h4>
-                <p>اختبار النظام الكامل وكتابة الأطروحة</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 5%;">5%</div>
-                </div>
-            </div>
-            
-            <h3 style="margin-top: 2rem;">الإجمالي:</h3>
-            <div class="progress-bar" style="height: 40px;">
-                <div class="progress-fill" style="width: 50%; font-size: 1.1rem;">50% مكتمل</div>
+            <div class="highlight">
+                <strong>إجمالي التقدم: 80%</strong>
+                <p>المشروع في مراحل متقدمة جداً ويقترب من الانتهاء!</p>
             </div>
         </section>
         
-        <!-- القسم السابع: التقنيات المستخدمة -->
+        <!-- القسم الثامن: التقنيات المستخدمة -->
         <section>
-            <h2>🛠️ التقنيات والأدوات</h2>
+            <h2>💻 التقنيات والأدوات المستخدمة</h2>
             
-            <h3>لغات البرمجة:</h3>
+            <h3>البرمجة والمكتبات:</h3>
             <div class="grid">
                 <div class="grid-item">
                     <h4>Python 3.11</h4>
-                    <p>معالجة البيانات والذكاء الاصطناعي</p>
+                    <p>لغة البرمجة الرئيسية</p>
                 </div>
                 <div class="grid-item">
-                    <h4>C++ / Arduino</h4>
-                    <p>برمجة الأردوينو واقتباس الإشارة</p>
+                    <h4>scikit-learn</h4>
+                    <p>نماذج التعلم الآلي</p>
                 </div>
                 <div class="grid-item">
-                    <h4>HTML/CSS/JavaScript</h4>
-                    <p>الواجهة الإلكترونية</p>
+                    <h4>NumPy</h4>
+                    <p>معالجة المصفوفات</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Matplotlib</h4>
+                    <p>رسم الرسوم البيانية</p>
+                </div>
+                <div class="grid-item">
+                    <h4>wfdb</h4>
+                    <p>قراءة بيانات ECG</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Arduino IDE</h4>
+                    <p>برمجة الميكروكنترولر</p>
                 </div>
             </div>
             
             <h3>الأدوات والمنصات:</h3>
-            <div class="card">
-                <p>🔹 <strong>Visual Studio Code:</strong> محرر الأكواد</p>
-                <p>🔹 <strong>Jupyter Notebook:</strong> تطوير وتجربة الأكواد</p>
-                <p>🔹 <strong>GitHub:</strong> إدارة الإصدارات</p>
-                <p>🔹 <strong>Arduino IDE:</strong> برمجة المتحكم الدقيق</p>
-                <p>🔹 <strong>Google Colab:</strong> تدريب النماذج على GPU</p>
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>Visual Studio Code</h4>
+                    <p>محرر الأكواد</p>
+                </div>
+                <div class="grid-item">
+                    <h4>GitHub</h4>
+                    <p>إدارة المشروع والنسخ الاحتياطي</p>
+                </div>
+                <div class="grid-item">
+                    <h4>GitHub Pages</h4>
+                    <p>استضافة الموقع</p>
+                </div>
+                <div class="grid-item">
+                    <h4>PhysioNet</h4>
+                    <p>قواعد البيانات الطبية</p>
+                </div>
             </div>
         </section>
     </div>
     
     <footer>
-        <p>🏥 مشروع السنة الخامسة - هندسة طبية</p>
-        <p>نظام تشخيص أمراض القلب بالذكاء الاصطناعي</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">© 2026 - جميع الحقوق محفوظة</p>
+        <h3>📞 معلومات الاتصال</h3>
+        <p><strong>البريد الإلكتروني:</strong> moazsyria90@gmail.com</p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/moaz26medical/heart-disease-ai" style="color: #667eea;">moaz26medical/heart-disease-ai</a></p>
+        <p><strong>الموقع:</strong> <a href="https://moaz26medical.github.io/heart-disease-ai/" style="color: #667eea;">https://moaz26medical.github.io/heart-disease-ai/</a></p>
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #555;">
+        <p>&copy; 2026 - مشروع السنة الخامسة هندسة طبية - جامعة تشرين</p>
+        <p style="font-size: 0.9rem; color: #aaa;">آخر تحديث: 2 أبريل 2026</p>
     </footer>
 </body>
 </html>
