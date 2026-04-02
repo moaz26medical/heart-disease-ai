@@ -245,6 +245,45 @@
             font-weight: bold;
             color: #fff;
         }
+        
+        .code-block {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            direction: ltr;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.5rem;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #218838;
+        }
+        
+        .file-list {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .file-list li {
+            margin: 0.5rem 0;
+            padding-right: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -259,7 +298,10 @@
         <a href="#hardware">العتاد</a>
         <a href="#databases">البيانات</a>
         <a href="#ai">الذكاء الاصطناعي</a>
+        <a href="#arduino">الأردوينو</a>
+        <a href="#python">البايثون</a>
         <a href="#results">النتائج</a>
+        <a href="#files">الملفات</a>
         <a href="#progress">التقدم</a>
     </nav>
     
@@ -336,72 +378,91 @@
                 <h4>المواصفات التقنية:</h4>
                 <ul style="margin-right: 1.5rem;">
                     <li><strong>دقة عالية:</strong> التقاط إشارات ضعيفة جداً (بالميلي فولت)</li>
-                    <li><strong>استهلاك طاقة منخفض:</strong> مناسب للأجهزة المحمولة</li>
-                    <li><strong>توافق:</strong> يعمل مع Arduino و Raspberry Pi و ESP32</li>
-                    <li><strong>فلترة متقدمة:</strong> تقليل الضجيج والتشويش</li>
-                    <li><strong>كشف فصل الأقطاب:</strong> تنبيهات عند انقطاع الاتصال</li>
+                    <li><strong>استهلاك منخفض:</strong> يعمل بكفاءة على بطاريات صغيرة</li>
+                    <li><strong>سهل الاستخدام:</strong> يتصل مباشرة بالأردوينو</li>
+                    <li><strong>كشف الاتصال:</strong> يكتشف تلقائياً فقدان الأقطاب</li>
+                    <li><strong>التصفية المدمجة:</strong> يزيل الضجيج الكهربائي</li>
                 </ul>
             </div>
             
-            <h3>سلسلة المعالجة (Signal Chain):</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>1️⃣ الاقتباس</h4>
-                    <p>الأقطاب على الجلد</p>
-                </div>
-                <div class="grid-item">
-                    <h4>2️⃣ التكبير</h4>
-                    <p>مكبر العمليات AD8232</p>
-                </div>
-                <div class="grid-item">
-                    <h4>3️⃣ التحويل</h4>
-                    <p>ADC في الأردوينو</p>
-                </div>
-                <div class="grid-item">
-                    <h4>4️⃣ النقل</h4>
-                    <p>Serial Communication</p>
-                </div>
-                <div class="grid-item">
-                    <h4>5️⃣ المعالجة</h4>
-                    <p>Python و Numpy</p>
-                </div>
-                <div class="grid-item">
-                    <h4>6️⃣ التشخيص</h4>
-                    <p>نموذج AI</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- القسم الرابع: قواعد البيانات -->
-        <section id="databases">
-            <h2>📊 قواعد البيانات الطبية</h2>
-            <p>نستخدم قواعد بيانات عالمية معتمدة من موقع PhysioNet لتدريب نموذج الذكاء الاصطناعي:</p>
-            
+            <h3>المكونات الأخرى:</h3>
             <table>
                 <tr>
-                    <th>قاعدة البيانات</th>
-                    <th>عدد السجلات</th>
-                    <th>الاستخدام</th>
+                    <th>المكون</th>
+                    <th>الوظيفة</th>
+                    <th>الملاحظات</th>
                 </tr>
                 <tr>
-                    <td><strong>MIT-BIH Arrhythmia</strong></td>
-                    <td>48 ساعة من التسجيلات</td>
-                    <td>اضطرابات النظم والحالات الطبيعية</td>
+                    <td><strong>Arduino Uno</strong></td>
+                    <td>معالج البيانات الرئيسي</td>
+                    <td>يقرأ من الحساس ويرسل إلى الكمبيوتر</td>
                 </tr>
                 <tr>
-                    <td><strong>PTB Database</strong></td>
-                    <td>549 سجل</td>
-                    <td>الاحتشاء ونقص التروية</td>
+                    <td><strong>أقطاب كهربائية</strong></td>
+                    <td>التقاط الإشارات من الجسم</td>
+                    <td>3 أقطاب: أحمر (RA)، أسود (LA)، أبيض (RL)</td>
                 </tr>
                 <tr>
-                    <td><strong>Long-Term ST Database</strong></td>
-                    <td>86 ساعة</td>
-                    <td>نقص التروية والعصيدة</td>
+                    <td><strong>كابل USB</strong></td>
+                    <td>الاتصال بالكمبيوتر</td>
+                    <td>نقل البيانات والطاقة</td>
                 </tr>
                 <tr>
-                    <td><strong>UCI Heart Disease</strong></td>
-                    <td>303 مريض</td>
-                    <td>بيانات سريرية شاملة</td>
+                    <td><strong>أسلاك التوصيل</strong></td>
+                    <td>ربط المكونات ببعضها</td>
+                    <td>أسلاك ذكر-ذكر أو ذكر-أنثى</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- القسم الرابع: البيانات -->
+        <section id="databases">
+            <h2>📊 قواعد البيانات المستخدمة</h2>
+            
+            <h3>MIT-BIH Arrhythmia Database</h3>
+            <div class="card">
+                <h4>المصدر:</h4>
+                <p><strong>PhysioNet:</strong> <a href="https://physionet.org/" target="_blank">https://physionet.org/</a></p>
+                
+                <h4>المعلومات:</h4>
+                <ul style="margin-right: 1.5rem;">
+                    <li>قاعدة بيانات عامة ومجانية</li>
+                    <li>تحتوي على آلاف تسجيلات ECG الحقيقية</li>
+                    <li>مصنفة حسب نوع الاضطراب</li>
+                    <li>تردد العينات: 360 Hz</li>
+                    <li>مدة كل تسجيل: 30 دقيقة</li>
+                </ul>
+            </div>
+            
+            <h3>البيانات المستخدمة في هذا المشروع:</h3>
+            <table>
+                <tr>
+                    <th>المعيار</th>
+                    <th>القيمة</th>
+                </tr>
+                <tr>
+                    <td>عدد النبضات الطبيعية</td>
+                    <td>300 نبضة</td>
+                </tr>
+                <tr>
+                    <td>عدد نبضات نقص التروية</td>
+                    <td>300 نبضة</td>
+                </tr>
+                <tr>
+                    <td>إجمالي البيانات</td>
+                    <td>600 نبضة</td>
+                </tr>
+                <tr>
+                    <td>بيانات التدريب</td>
+                    <td>480 نبضة (80%)</td>
+                </tr>
+                <tr>
+                    <td>بيانات الاختبار</td>
+                    <td>120 نبضة (20%)</td>
+                </tr>
+                <tr>
+                    <td>مدة كل نبضة</td>
+                    <td>0.8 ثانية</td>
                 </tr>
             </table>
         </section>
@@ -410,115 +471,358 @@
         <section id="ai">
             <h2>🤖 نموذج الذكاء الاصطناعي</h2>
             
-            <h3>نوع النموذج: Random Forest Classifier</h3>
+            <h3>خوارزمية Random Forest</h3>
             <div class="card">
-                <h4>المميزات:</h4>
+                <h4>لماذا Random Forest؟</h4>
                 <ul style="margin-right: 1.5rem;">
-                    <li>دقة عالية جداً في التصنيف</li>
-                    <li>سهل الشرح والفهم</li>
-                    <li>سريع في التنبؤ</li>
-                    <li>يتعامل مع البيانات غير المتوازنة</li>
-                    <li>يوفر درجات أهمية الميزات</li>
+                    <li>✅ دقة عالية جداً (100% في هذا المشروع)</li>
+                    <li>✅ سريعة في التدريب والتنبؤ</li>
+                    <li>✅ تتعامل مع البيانات المعقدة</li>
+                    <li>✅ توفر معلومات عن أهمية الميزات</li>
+                    <li>✅ لا تحتاج معايرة معقدة</li>
                 </ul>
             </div>
             
-            <h3>الميزات المستخلصة (Features):</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>القيمة العظمى</h4>
-                    <p>أعلى قيمة في الإشارة</p>
-                </div>
-                <div class="grid-item">
-                    <h4>القيمة الصغرى</h4>
-                    <p>أقل قيمة في الإشارة</p>
-                </div>
-                <div class="grid-item">
-                    <h4>المتوسط</h4>
-                    <p>متوسط قيم الإشارة</p>
-                </div>
-                <div class="grid-item">
-                    <h4>الانحراف المعياري</h4>
-                    <p>تشتت البيانات</p>
-                </div>
-                <div class="grid-item">
-                    <h4>الطاقة</h4>
-                    <p>مجموع مربعات الإشارة</p>
-                </div>
-                <div class="grid-item">
-                    <h4>مقطع ST</h4>
-                    <p>المؤشر الرئيسي للمرض</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- القسم السادس: النتائج -->
-        <section id="results">
-            <h2>📈 نتائج التدريب والاختبار</h2>
+            <h3>الميزات المستخلصة (10 ميزات):</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>الميزة</th>
+                    <th>الوصف</th>
+                    <th>الأهمية</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>القيمة العظمى (Max)</td>
+                    <td>أعلى نقطة في الإشارة</td>
+                    <td>عالية</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>القيمة الصغرى (Min)</td>
+                    <td>أقل نقطة في الإشارة</td>
+                    <td>عالية</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>المتوسط (Mean)</td>
+                    <td>متوسط قيم الإشارة</td>
+                    <td>متوسطة</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>الانحراف المعياري (Std Dev)</td>
+                    <td>تشتت البيانات حول المتوسط</td>
+                    <td>عالية</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>الطاقة (Energy)</td>
+                    <td>مجموع مربعات الإشارة</td>
+                    <td>عالية</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>الانحراف (Skewness)</td>
+                    <td>عدم التماثل في التوزيع</td>
+                    <td>متوسطة</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>التفرطح (Kurtosis)</td>
+                    <td>حدة الذروة في التوزيع</td>
+                    <td>متوسطة</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>معدل التغيير</td>
+                    <td>سرعة التغيير في الإشارة</td>
+                    <td>عالية</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>متوسط ST ⭐</td>
+                    <td>متوسط منطقة ST (الأهم)</td>
+                    <td>🔴 حرجة</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>تقاطعات الصفر</td>
+                    <td>عدد مرات عبور الإشارة للصفر</td>
+                    <td>متوسطة</td>
+                </tr>
+            </table>
             
-            <h3>مقاييس الأداء:</h3>
+            <h3>نتائج التدريب:</h3>
             <div class="results-grid">
                 <div class="result-card">
                     <h4>الدقة (Accuracy)</h4>
                     <div class="percentage">100%</div>
-                    <p>دقة التصنيف الكلية</p>
                 </div>
                 <div class="result-card">
                     <h4>الدقة الموجبة (Precision)</h4>
                     <div class="percentage">100%</div>
-                    <p>دقة التنبؤات الموجبة</p>
                 </div>
                 <div class="result-card">
                     <h4>الاستدعاء (Recall)</h4>
                     <div class="percentage">100%</div>
-                    <p>نسبة الحالات المكتشفة</p>
                 </div>
                 <div class="result-card">
-                    <h4>درجة F1</h4>
+                    <h4>درجة F1 (F1-Score)</h4>
                     <div class="percentage">100%</div>
-                    <p>التوازن بين الدقة والاستدعاء</p>
                 </div>
             </div>
             
-            <h3>الرسوم البيانية التفصيلية:</h3>
             <div class="image-container">
-                <img src="images/model_results.png" alt="نتائج نموذج الذكاء الاصطناعي">
-                <p class="image-caption">الشكل 1: رسوم بيانية توضح أداء النموذج (مصفوفة الالتباس، أهمية الميزات، المقاييس، توزيع الاحتمالية)</p>
+                <img src="images/model_results.png" alt="نتائج النموذج - الرسوم البيانية">
+                <p class="image-caption">الشكل 1: نتائج تدريب النموذج - مصفوفة الالتباس، أهمية الميزات، مقارنة المقاييس، توزيع الاحتمالية</p>
+            </div>
+        </section>
+        
+        <!-- القسم السادس: كود الأردوينو -->
+        <section id="arduino">
+            <h2>🔧 كود الأردوينو (Arduino ECG Sensor)</h2>
+            
+            <h3>الملف: arduino_ecg_sensor.ino</h3>
+            <div class="highlight">
+                <strong>الوصف:</strong> كود الأردوينو الكامل لقراءة حساس AD8232 واستخلاص الميزات وإرسال البيانات إلى الكمبيوتر
             </div>
             
-            <h3>بيانات التدريب:</h3>
+            <h3>المميزات:</h3>
+            <div class="card">
+                <h4>✅ قراءة الإشارة</h4>
+                <p>قراءة 288 عينة من الحساس بتردد 360 Hz (نبضة قلب واحدة = 0.8 ثانية)</p>
+            </div>
+            <div class="card">
+                <h4>✅ استخلاص الميزات</h4>
+                <p>حساب 10 ميزات من كل نبضة (Max, Min, Mean, Std Dev, Energy, إلخ)</p>
+            </div>
+            <div class="card">
+                <h4>✅ كشف الأخطاء</h4>
+                <p>كشف فقدان الاتصال بالأقطاب الكهربائية تلقائياً</p>
+            </div>
+            <div class="card">
+                <h4>✅ الإرسال التسلسلي</h4>
+                <p>إرسال البيانات إلى الكمبيوتر عبر USB بمعدل بود 115200</p>
+            </div>
+            
+            <h3>التوصيل:</h3>
+            <div class="code-block">
+AD8232 GND  → Arduino GND
+AD8232 3.3V → Arduino 3.3V
+AD8232 OUT  → Arduino A0 (Analog Pin)
+AD8232 LO-  → Arduino Pin 10
+AD8232 LO+  → Arduino Pin 11
+            </div>
+            
+            <h3>الإخراج:</h3>
+            <div class="code-block">
+=====================================
+🏥 نظام قراءة حساس AD8232 ECG
+=====================================
+تردد العينات: 360 Hz
+عدد العينات لكل نبضة: 288
+جاري البدء...
+
+512 515 518 520 522 525 527 530...
+
+--- نبضة قلب جديدة ---
+📊 الإحصائيات:
+   القيمة العظمى: 620
+   القيمة الصغرى: 410
+   المتوسط: 515.3
+   الانحراف المعياري: 45.2
+
+🔍 الميزات المستخلصة:
+   1. القيمة العظمى: 620
+   2. القيمة الصغرى: 410
+   ...
+
+📤 إرسال البيانات: HEARTBEAT:620,410,515.3,...
+            </div>
+            
+            <h3>التحميل على الأردوينو:</h3>
+            <ol style="margin-right: 1.5rem;">
+                <li>افتح Arduino IDE</li>
+                <li>انسخ محتوى <code>arduino_ecg_sensor.ino</code></li>
+                <li>اختر اللوحة والمنفذ من القائمة</li>
+                <li>اضغط على زر Upload</li>
+                <li>افتح Serial Monitor واختر معدل البود 115200</li>
+            </ol>
+            
+            <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/arduino_ecg_sensor.ino" class="download-btn" target="_blank">📥 تحميل الكود من GitHub</a>
+        </section>
+        
+        <!-- القسم السابع: برنامج البايثون -->
+        <section id="python">
+            <h2>🐍 برنامج البايثون (Python Integration)</h2>
+            
+            <h3>الملف: python_arduino_integration.py</h3>
+            <div class="highlight">
+                <strong>الوصف:</strong> برنامج بايثون يقرأ البيانات من الأردوينو ويستخدم النموذج المدرب للتنبؤ بحالة القلب
+            </div>
+            
+            <h3>المميزات:</h3>
+            <div class="card">
+                <h4>✅ قراءة البيانات</h4>
+                <p>قراءة البيانات من الأردوينو عبر المنفذ التسلسلي (USB)</p>
+            </div>
+            <div class="card">
+                <h4>✅ التنبؤ الذكي</h4>
+                <p>استخدام النموذج المدرب للتنبؤ بحالة القلب (طبيعي أو مرض)</p>
+            </div>
+            <div class="card">
+                <h4>✅ عرض النتائج</h4>
+                <p>عرض النتائج بشكل جميل مع درجة الثقة ومستوى الخطورة</p>
+            </div>
+            <div class="card">
+                <h4>✅ حفظ البيانات</h4>
+                <p>حفظ جميع النتائج في ملف نصي للمراجعة لاحقاً</p>
+            </div>
+            
+            <h3>المتطلبات:</h3>
+            <div class="code-block">
+pip install pyserial scikit-learn numpy matplotlib
+            </div>
+            
+            <h3>الاستخدام:</h3>
+            <div class="code-block">
+# تعديل المنفذ حسب نظامك (COM3, COM4, إلخ)
+SERIAL_PORT = 'COM3'
+BAUD_RATE = 115200
+
+# تشغيل البرنامج
+python3 python_arduino_integration.py
+            </div>
+            
+            <h3>الإخراج:</h3>
+            <div class="code-block">
+======================================================================
+🏥 نظام تشخيص أمراض القلب - قراءة البيانات من الأردوينو
+======================================================================
+
+✅ تم تحميل النموذج من: heart_disease_model.pkl
+✅ تم الاتصال بالأردوينو على المنفذ: COM3
+
+======================================================================
+⏰ الوقت: 2026-04-02 15:30:45
+======================================================================
+
+📊 الميزات المستخلصة:
+    1. القيمة العظمى        :     620.00
+    2. القيمة الصغرى        :     410.00
+    3. المتوسط              :     515.30
+    ...
+
+🔮 نتيجة التنبؤ:
+✅ قلب طبيعي (Normal)
+
+📈 درجة الثقة:
+   - احتمال قلب طبيعي:      99.50%
+   - احتمال نقص تروية:      0.50%
+
+✅ مستوى الخطورة: منخفض جداً
+            </div>
+            
+            <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/python_arduino_integration.py" class="download-btn" target="_blank">📥 تحميل البرنامج من GitHub</a>
+        </section>
+        
+        <!-- القسم الثامن: النتائج -->
+        <section id="results">
+            <h2>📊 نتائج المشروع</h2>
+            
+            <h3>نتائج تدريب النموذج:</h3>
             <table>
                 <tr>
-                    <th>المعيار</th>
+                    <th>المقياس</th>
                     <th>القيمة</th>
+                    <th>التقييم</th>
                 </tr>
                 <tr>
-                    <td>عدد نبضات التدريب</td>
-                    <td>480 نبضة</td>
+                    <td>الدقة (Accuracy)</td>
+                    <td>100%</td>
+                    <td>✅ ممتاز</td>
                 </tr>
                 <tr>
-                    <td>عدد نبضات الاختبار</td>
-                    <td>120 نبضة</td>
+                    <td>الدقة الموجبة (Precision)</td>
+                    <td>100%</td>
+                    <td>✅ ممتاز</td>
                 </tr>
                 <tr>
-                    <td>إجمالي البيانات</td>
-                    <td>600 نبضة</td>
+                    <td>الاستدعاء (Recall)</td>
+                    <td>100%</td>
+                    <td>✅ ممتاز</td>
                 </tr>
                 <tr>
-                    <td>عدد الميزات</td>
-                    <td>10 ميزات</td>
+                    <td>درجة F1 (F1-Score)</td>
+                    <td>100%</td>
+                    <td>✅ ممتاز</td>
                 </tr>
                 <tr>
                     <td>عدد الأشجار</td>
-                    <td>100 شجرة</td>
+                    <td>100</td>
+                    <td>✅ كافٍ</td>
                 </tr>
                 <tr>
                     <td>وقت التدريب</td>
-                    <td>أقل من ثانية واحدة</td>
+                    <td>&lt; 1 ثانية</td>
+                    <td>✅ سريع جداً</td>
                 </tr>
             </table>
+            
+            <div class="image-container">
+                <img src="images/model_results.png" alt="نتائج النموذج - الرسوم البيانية">
+                <p class="image-caption">الشكل 2: رسوم بيانية توضح نتائج التدريب والأداء</p>
+            </div>
         </section>
         
-        <!-- القسم السابع: التقدم -->
+        <!-- القسم التاسع: الملفات -->
+        <section id="files">
+            <h2>📁 الملفات المتاحة</h2>
+            
+            <h3>ملفات المشروع على GitHub:</h3>
+            <div class="file-list">
+                <ul>
+                    <li>📄 <strong>index.html</strong> - الموقع الإلكتروني الرئيسي</li>
+                    <li>🐍 <strong>train_model.py</strong> - كود تدريب نموذج الذكاء الاصطناعي</li>
+                    <li>🔧 <strong>arduino_ecg_sensor.ino</strong> - كود الأردوينو لقراءة الحساس</li>
+                    <li>📖 <strong>ARDUINO_SETUP.md</strong> - دليل توصيل الأردوينو والحساس</li>
+                    <li>🐍 <strong>python_arduino_integration.py</strong> - برنامج البايثون للتنبؤ</li>
+                    <li>📊 <strong>images/model_results.png</strong> - الرسوم البيانية للنموذج</li>
+                    <li>📋 <strong>README.md</strong> - توثيق المشروع</li>
+                </ul>
+            </div>
+            
+            <h3>الملفات المولدة:</h3>
+            <div class="file-list">
+                <ul>
+                    <li>🤖 <strong>heart_disease_model.pkl</strong> - النموذج المدرب (يُحفظ تلقائياً)</li>
+                    <li>📊 <strong>ecg_results.txt</strong> - نتائج التنبؤ المحفوظة</li>
+                </ul>
+            </div>
+            
+            <h3>روابط التحميل:</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>🐍 كود التدريب</h4>
+                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/train_model.py" class="download-btn" target="_blank">تحميل</a>
+                </div>
+                <div class="grid-item">
+                    <h4>🔧 كود الأردوينو</h4>
+                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/arduino_ecg_sensor.ino" class="download-btn" target="_blank">تحميل</a>
+                </div>
+                <div class="grid-item">
+                    <h4>🐍 برنامج البايثون</h4>
+                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/python_arduino_integration.py" class="download-btn" target="_blank">تحميل</a>
+                </div>
+                <div class="grid-item">
+                    <h4>📖 دليل الأردوينو</h4>
+                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/ARDUINO_SETUP.md" class="download-btn" target="_blank">تحميل</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- القسم العاشر: التقدم -->
         <section id="progress">
             <h2>📊 نسبة تقدم المشروع</h2>
             
@@ -557,36 +861,44 @@
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 5: ربط العتاد والبرمجة</h4>
+                <h4>✅ المرحلة 5: كود الأردوينو</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 60%;">60%</div>
+                    <div class="progress-fill" style="width: 100%;">100%</div>
                 </div>
-                <p>ربط الحساس مع الأردوينو والبايثون (قيد الإنجاز)</p>
+                <p>كتابة كود الأردوينو الكامل لقراءة الحساس واستخلاص الميزات</p>
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 6: الاختبار على بيانات حقيقية</h4>
+                <h4>✅ المرحلة 6: برنامج البايثون</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 40%;">40%</div>
+                    <div class="progress-fill" style="width: 100%;">100%</div>
                 </div>
-                <p>اختبار النظام على إشارات قلب حقيقية</p>
+                <p>برنامج البايثون لقراءة البيانات والتنبؤ</p>
             </div>
             
             <div class="card">
-                <h4>⏳ المرحلة 7: الموقع الإلكتروني والتوثيق</h4>
+                <h4>⏳ المرحلة 7: الاختبار على بيانات حقيقية</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 80%;">80%</div>
+                    <div class="progress-fill" style="width: 50%;">50%</div>
                 </div>
-                <p>بناء الموقع والتوثيق النهائي</p>
+                <p>اختبار النظام على إشارات قلب حقيقية من أشخاص مختلفين</p>
+            </div>
+            
+            <div class="card">
+                <h4>✅ المرحلة 8: الموقع الإلكتروني والتوثيق</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;">100%</div>
+                </div>
+                <p>بناء الموقع والتوثيق الكامل للمشروع</p>
             </div>
             
             <div class="highlight">
-                <strong>إجمالي التقدم: 80%</strong>
-                <p>المشروع في مراحل متقدمة جداً ويقترب من الانتهاء!</p>
+                <strong>إجمالي التقدم: 90%</strong>
+                <p>المشروع متقدم جداً! تم إكمال جميع الأكواد والملفات. المتبقي: اختبار على بيانات حقيقية وتحسينات نهائية.</p>
             </div>
         </section>
         
-        <!-- القسم الثامن: التقنيات المستخدمة -->
+        <!-- القسم الحادي عشر: التقنيات المستخدمة -->
         <section>
             <h2>💻 التقنيات والأدوات المستخدمة</h2>
             
@@ -609,8 +921,8 @@
                     <p>رسم الرسوم البيانية</p>
                 </div>
                 <div class="grid-item">
-                    <h4>wfdb</h4>
-                    <p>قراءة بيانات ECG</p>
+                    <h4>PySerial</h4>
+                    <p>الاتصال بالأردوينو</p>
                 </div>
                 <div class="grid-item">
                     <h4>Arduino IDE</h4>
@@ -635,6 +947,14 @@
                 <div class="grid-item">
                     <h4>PhysioNet</h4>
                     <p>قواعد البيانات الطبية</p>
+                </div>
+                <div class="grid-item">
+                    <h4>Arduino Uno</h4>
+                    <p>لوحة التحكم الرئيسية</p>
+                </div>
+                <div class="grid-item">
+                    <h4>AD8232 Sensor</h4>
+                    <p>حساس ECG عالي الدقة</p>
                 </div>
             </div>
         </section>
