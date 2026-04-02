@@ -241,7 +241,8 @@ void extractFeatures(float features[]) {
   // الميزة 8: معدل التغيير
   float rateOfChange = 0;
   for (int i = 1; i < BUFFER_SIZE; i++) {
-    rateOfChange += abs(ecgBuffer[i] - ecgBuffer[i-1]);
+    int diff = ecgBuffer[i] - ecgBuffer[i-1];
+    rateOfChange += (diff < 0) ? -diff : diff;  // القيمة المطلقة
   }
   rateOfChange = rateOfChange / BUFFER_SIZE;
   features[7] = rateOfChange;
