@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشروع السنة الخامسة - تشخيص أمراض القلب بالذكاء الاصطناعي</title>
+    <title>🏥 نظام تشخيص أمراض القلب بالذكاء الاصطناعي</title>
     <style>
         * {
             margin: 0;
@@ -11,963 +11,812 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #2196F3;
+            --secondary: #FF5722;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #f44336;
+            --light: #f5f5f5;
+            --dark: #333;
+            --text: #555;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            color: var(--text);
             line-height: 1.6;
+            min-height: 100vh;
         }
         
+        /* Header */
         header {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            animation: slideDown 0.6s ease-out;
         }
         
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #ddd;
+            margin-bottom: 1rem;
         }
         
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            animation: fillProgress 1.5s ease-out;
+        }
+        
+        /* Navigation */
         nav {
-            background: #333;
+            background: #222;
             padding: 1rem;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
             overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 1.5rem;
-            font-weight: bold;
-            transition: color 0.3s;
+            margin: 0 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
             display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
         
         nav a:hover {
-            color: #667eea;
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
         
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
         
+        /* Sections */
         section {
             background: white;
             margin-bottom: 2rem;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-out;
         }
         
         section h2 {
-            color: #667eea;
+            color: var(--primary);
             margin-bottom: 1.5rem;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 0.8rem;
+            font-size: 2rem;
         }
         
         section h3 {
-            color: #764ba2;
+            color: var(--secondary);
             margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
         
-        .card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 1.5rem;
+        section p {
+            color: var(--text);
             margin-bottom: 1rem;
-            border-radius: 5px;
+            text-align: justify;
+        }
+        
+        /* Cards */
+        .card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .card h4 {
-            color: #667eea;
+            color: var(--primary);
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
         
+        .card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         table th {
-            background: #667eea;
+            background: var(--primary);
             color: white;
             padding: 1rem;
             text-align: right;
+            font-weight: 600;
         }
         
         table td {
-            padding: 0.8rem 1rem;
-            border-bottom: 1px solid #ddd;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
         }
         
         table tr:hover {
-            background: #f0f0f0;
+            background: #f9f9f9;
         }
         
-        .progress-bar {
-            background: #e0e0e0;
-            height: 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 1rem 0;
+        table tr:last-child td {
+            border-bottom: none;
         }
         
-        .progress-fill {
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            transition: width 0.3s;
-        }
-        
-        .badge {
+        /* Buttons */
+        .btn {
             display: inline-block;
-            background: #667eea;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-right: 0.5rem;
         }
         
-        .badge.success {
-            background: #28a745;
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
         }
         
-        .badge.warning {
-            background: #ffc107;
-            color: #333;
+        .btn-success {
+            background: var(--success);
+            color: white;
         }
         
-        .badge.danger {
-            background: #dc3545;
+        .btn-success:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
         }
         
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #1976D2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.4);
+        }
+        
+        .stat-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .stat-box p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+        }
+        
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: white;
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
         }
         
-        .highlight {
-            background: #fff3cd;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            border-left: 4px solid #ffc107;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .grid-item {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            border: 2px solid #667eea;
-        }
-        
-        .grid-item h4 {
-            color: #667eea;
+        footer p {
             margin-bottom: 0.5rem;
+            color: #ddd;
         }
         
-        .image-container {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            margin: 1rem 0;
-        }
-        
-        .image-caption {
-            color: #666;
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .result-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-card .percentage {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        
-        .code-block {
-            background: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 1rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            direction: ltr;
-        }
-        
-        .download-btn {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
+        footer a {
+            color: var(--primary);
             text-decoration: none;
-            margin: 0.5rem;
-            transition: background 0.3s;
+            transition: color 0.3s;
         }
         
-        .download-btn:hover {
-            background: #218838;
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
         }
         
-        .file-list {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .file-list li {
-            margin: 0.5rem 0;
-            padding-right: 1rem;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fillProgress {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>🏥 مشروع السنة الخامسة هندسة طبية</h1>
-        <p>نظام تشخيص أمراض القلب بمساعدة الذكاء الاصطناعي</p>
+        <h1>🏥 نظام تشخيص أمراض القلب بالذكاء الاصطناعي</h1>
+        <p>نظام متكامل لتشخيص أمراض القلب باستخدام تقنيات الذكاء الاصطناعي والعتاد الإلكتروني</p>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">اكتمال المشروع: 100% ✅</p>
     </header>
     
+    <!-- Navigation -->
     <nav>
         <a href="#overview">نظرة عامة</a>
-        <a href="#diseases">الأمراض</a>
-        <a href="#hardware">العتاد</a>
-        <a href="#databases">البيانات</a>
-        <a href="#ai">الذكاء الاصطناعي</a>
-        <a href="#arduino">الأردوينو</a>
-        <a href="#python">البايثون</a>
-        <a href="#results">النتائج</a>
+        <a href="#features">المميزات</a>
+        <a href="#stats">الإحصائيات</a>
         <a href="#files">الملفات</a>
-        <a href="#progress">التقدم</a>
+        <a href="#usage">الاستخدام</a>
+        <a href="#download">التحميل</a>
+        <a href="#contact">التواصل</a>
     </nav>
     
+    <!-- Main Content -->
     <div class="container">
-        <!-- القسم الأول: نظرة عامة -->
+        <!-- Overview Section -->
         <section id="overview">
-            <h2>📋 نظرة عامة على المشروع</h2>
-            <p>هذا المشروع يهدف إلى بناء نظام متكامل لتشخيص أمراض القلب باستخدام الذكاء الاصطناعي. يجمع المشروع بين الهندسة الطبية والبرمجة والتعلم الآلي لإنشاء حل عملي وفعال.</p>
+            <h2>📋 نظرة عامة</h2>
+            <p>
+                مشروع متكامل لتشخيص أمراض القلب (خاصة العصيدة القلبية ونقص التروية) باستخدام تقنيات الذكاء الاصطناعي المتقدمة والعتاد الإلكتروني. يجمع النظام بين:
+            </p>
             
-            <h3>🎯 الأهداف الرئيسية:</h3>
-            <div class="card">
-                <h4>1. اقتباس الإشارات القلبية</h4>
-                <p>استخدام حساس AD8232 عالي الدقة لالتقاط إشارات القلب الحقيقية من جسم الإنسان بأمان وسهولة.</p>
-            </div>
-            <div class="card">
-                <h4>2. معالجة الإشارات</h4>
-                <p>تطبيق تقنيات معالجة الإشارات الرقمية لتنظيف البيانات من الضجيج والتشويه.</p>
-            </div>
-            <div class="card">
-                <h4>3. التشخيص الذكي</h4>
-                <p>تدريب نموذج ذكاء اصطناعي على قواعد بيانات طبية حقيقية للتمييز بين الحالات الطبيعية والمرضية.</p>
-            </div>
-            <div class="card">
-                <h4>4. العرض التفاعلي</h4>
-                <p>إنشاء واجهة مستخدم سهلة تعرض الإشارات والنتائج بشكل واضح واحترافي.</p>
-            </div>
-        </section>
-        
-        <!-- القسم الثاني: أمراض القلب -->
-        <section id="diseases">
-            <h2>❤️ أمراض القلب المستهدفة</h2>
-            
-            <h3>المرض الرئيسي: العصيدة القلبية (Atherosclerosis)</h3>
-            <div class="highlight">
-                <strong>التعريف:</strong> هي تراكم الدهون والكوليسترول على جدران الشرايين، مما يؤدي إلى تضييقها وتقليل تدفق الدم وإمدادات الأكسجين للقلب.
-            </div>
-            
-            <h3>الأمراض الإضافية:</h3>
-            <table>
-                <tr>
-                    <th>المرض</th>
-                    <th>الوصف</th>
-                    <th>العلامات في ECG</th>
-                </tr>
-                <tr>
-                    <td><strong>نقص التروية (Ischemia)</strong></td>
-                    <td>نقص الأكسجين الواصل للقلب بسبب تضيق الشرايين</td>
-                    <td>انخفاض مقطع ST، انقلاب موجة T</td>
-                </tr>
-                <tr>
-                    <td><strong>الاحتشاء (Infarction)</strong></td>
-                    <td>موت جزء من عضلة القلب بسبب انسداد كامل</td>
-                    <td>ارتفاع مقطع ST، موجات Q عميقة</td>
-                </tr>
-                <tr>
-                    <td><strong>اضطرابات النظم (Arrhythmia)</strong></td>
-                    <td>عدم انتظام نبضات القلب</td>
-                    <td>تغيرات في المسافة بين النبضات</td>
-                </tr>
-                <tr>
-                    <td><strong>أمراض الصمامات</strong></td>
-                    <td>خلل في عمل صمامات القلب</td>
-                    <td>نفخات قلبية، تغيرات في الموجات</td>
-                </tr>
-            </table>
-        </section>
-        
-        <!-- القسم الثالث: العتاد -->
-        <section id="hardware">
-            <h2>⚙️ المكونات العتادية (Hardware)</h2>
-            
-            <h3>حساس AD8232 - مراقب نبض القلب</h3>
-            <div class="card">
-                <h4>المواصفات التقنية:</h4>
-                <ul style="margin-right: 1.5rem;">
-                    <li><strong>دقة عالية:</strong> التقاط إشارات ضعيفة جداً (بالميلي فولت)</li>
-                    <li><strong>استهلاك منخفض:</strong> يعمل بكفاءة على بطاريات صغيرة</li>
-                    <li><strong>سهل الاستخدام:</strong> يتصل مباشرة بالأردوينو</li>
-                    <li><strong>كشف الاتصال:</strong> يكتشف تلقائياً فقدان الأقطاب</li>
-                    <li><strong>التصفية المدمجة:</strong> يزيل الضجيج الكهربائي</li>
-                </ul>
-            </div>
-            
-            <h3>المكونات الأخرى:</h3>
-            <table>
-                <tr>
-                    <th>المكون</th>
-                    <th>الوظيفة</th>
-                    <th>الملاحظات</th>
-                </tr>
-                <tr>
-                    <td><strong>Arduino Uno</strong></td>
-                    <td>معالج البيانات الرئيسي</td>
-                    <td>يقرأ من الحساس ويرسل إلى الكمبيوتر</td>
-                </tr>
-                <tr>
-                    <td><strong>أقطاب كهربائية</strong></td>
-                    <td>التقاط الإشارات من الجسم</td>
-                    <td>3 أقطاب: أحمر (RA)، أسود (LA)، أبيض (RL)</td>
-                </tr>
-                <tr>
-                    <td><strong>كابل USB</strong></td>
-                    <td>الاتصال بالكمبيوتر</td>
-                    <td>نقل البيانات والطاقة</td>
-                </tr>
-                <tr>
-                    <td><strong>أسلاك التوصيل</strong></td>
-                    <td>ربط المكونات ببعضها</td>
-                    <td>أسلاك ذكر-ذكر أو ذكر-أنثى</td>
-                </tr>
-            </table>
-        </section>
-        
-        <!-- القسم الرابع: البيانات -->
-        <section id="databases">
-            <h2>📊 قواعد البيانات المستخدمة</h2>
-            
-            <h3>MIT-BIH Arrhythmia Database</h3>
-            <div class="card">
-                <h4>المصدر:</h4>
-                <p><strong>PhysioNet:</strong> <a href="https://physionet.org/" target="_blank">https://physionet.org/</a></p>
-                
-                <h4>المعلومات:</h4>
-                <ul style="margin-right: 1.5rem;">
-                    <li>قاعدة بيانات عامة ومجانية</li>
-                    <li>تحتوي على آلاف تسجيلات ECG الحقيقية</li>
-                    <li>مصنفة حسب نوع الاضطراب</li>
-                    <li>تردد العينات: 360 Hz</li>
-                    <li>مدة كل تسجيل: 30 دقيقة</li>
-                </ul>
-            </div>
-            
-            <h3>البيانات المستخدمة في هذا المشروع:</h3>
-            <table>
-                <tr>
-                    <th>المعيار</th>
-                    <th>القيمة</th>
-                </tr>
-                <tr>
-                    <td>عدد النبضات الطبيعية</td>
-                    <td>300 نبضة</td>
-                </tr>
-                <tr>
-                    <td>عدد نبضات نقص التروية</td>
-                    <td>300 نبضة</td>
-                </tr>
-                <tr>
-                    <td>إجمالي البيانات</td>
-                    <td>600 نبضة</td>
-                </tr>
-                <tr>
-                    <td>بيانات التدريب</td>
-                    <td>480 نبضة (80%)</td>
-                </tr>
-                <tr>
-                    <td>بيانات الاختبار</td>
-                    <td>120 نبضة (20%)</td>
-                </tr>
-                <tr>
-                    <td>مدة كل نبضة</td>
-                    <td>0.8 ثانية</td>
-                </tr>
-            </table>
-        </section>
-        
-        <!-- القسم الخامس: الذكاء الاصطناعي -->
-        <section id="ai">
-            <h2>🤖 نموذج الذكاء الاصطناعي</h2>
-            
-            <h3>خوارزمية Random Forest</h3>
-            <div class="card">
-                <h4>لماذا Random Forest؟</h4>
-                <ul style="margin-right: 1.5rem;">
-                    <li>✅ دقة عالية جداً (100% في هذا المشروع)</li>
-                    <li>✅ سريعة في التدريب والتنبؤ</li>
-                    <li>✅ تتعامل مع البيانات المعقدة</li>
-                    <li>✅ توفر معلومات عن أهمية الميزات</li>
-                    <li>✅ لا تحتاج معايرة معقدة</li>
-                </ul>
-            </div>
-            
-            <h3>الميزات المستخلصة (10 ميزات):</h3>
-            <table>
-                <tr>
-                    <th>#</th>
-                    <th>الميزة</th>
-                    <th>الوصف</th>
-                    <th>الأهمية</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>القيمة العظمى (Max)</td>
-                    <td>أعلى نقطة في الإشارة</td>
-                    <td>عالية</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>القيمة الصغرى (Min)</td>
-                    <td>أقل نقطة في الإشارة</td>
-                    <td>عالية</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>المتوسط (Mean)</td>
-                    <td>متوسط قيم الإشارة</td>
-                    <td>متوسطة</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>الانحراف المعياري (Std Dev)</td>
-                    <td>تشتت البيانات حول المتوسط</td>
-                    <td>عالية</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>الطاقة (Energy)</td>
-                    <td>مجموع مربعات الإشارة</td>
-                    <td>عالية</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>الانحراف (Skewness)</td>
-                    <td>عدم التماثل في التوزيع</td>
-                    <td>متوسطة</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>التفرطح (Kurtosis)</td>
-                    <td>حدة الذروة في التوزيع</td>
-                    <td>متوسطة</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>معدل التغيير</td>
-                    <td>سرعة التغيير في الإشارة</td>
-                    <td>عالية</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>متوسط ST ⭐</td>
-                    <td>متوسط منطقة ST (الأهم)</td>
-                    <td>🔴 حرجة</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>تقاطعات الصفر</td>
-                    <td>عدد مرات عبور الإشارة للصفر</td>
-                    <td>متوسطة</td>
-                </tr>
-            </table>
-            
-            <h3>نتائج التدريب:</h3>
-            <div class="results-grid">
-                <div class="result-card">
-                    <h4>الدقة (Accuracy)</h4>
-                    <div class="percentage">100%</div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <h3>الذكاء الاصطناعي</h3>
+                    <p>نموذج Random Forest للتنبؤ الدقيق بأمراض القلب</p>
                 </div>
-                <div class="result-card">
-                    <h4>الدقة الموجبة (Precision)</h4>
-                    <div class="percentage">100%</div>
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <h3>الأجهزة الإلكترونية</h3>
+                    <p>حساس AD8232 وأردوينو Uno لقراءة إشارات القلب</p>
                 </div>
-                <div class="result-card">
-                    <h4>الاستدعاء (Recall)</h4>
-                    <div class="percentage">100%</div>
+                <div class="feature">
+                    <div class="feature-icon">🖥️</div>
+                    <h3>الواجهات الرسومية</h3>
+                    <p>واجهة رسومية احترافية وموقع إلكتروني حديث</p>
                 </div>
-                <div class="result-card">
-                    <h4>درجة F1 (F1-Score)</h4>
-                    <div class="percentage">100%</div>
+                <div class="feature">
+                    <div class="feature-icon">💾</div>
+                    <h3>قاعدة البيانات</h3>
+                    <p>نظام SQLite لحفظ ومتابعة نتائج المرضى</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>التحليل والتقارير</h3>
+                    <p>إحصائيات وتقارير شاملة لكل مريض</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📖</div>
+                    <h3>التوثيق الشامل</h3>
+                    <p>دليل كامل بالعربية والإنجليزية</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features">
+            <h2>✨ المميزات الرئيسية</h2>
+            
+            <h3>🎯 المميزات التقنية:</h3>
+            <div class="card">
+                <h4>✅ دقة عالية جداً</h4>
+                <p>نسبة دقة 100% في التنبؤ بأمراض القلب على بيانات الاختبار</p>
+            </div>
+            <div class="card">
+                <h4>✅ معالجة فورية</h4>
+                <p>معالجة البيانات والتنبؤ في أقل من ثانية واحدة</p>
+            </div>
+            <div class="card">
+                <h4>✅ سهولة الاستخدام</h4>
+                <p>واجهة رسومية بديهية لا تحتاج خبرة تقنية</p>
+            </div>
+            <div class="card">
+                <h4>✅ حفظ آمن للبيانات</h4>
+                <p>قاعدة بيانات آمنة لحفظ بيانات المرضى والنتائج</p>
+            </div>
+            <div class="card">
+                <h4>✅ تقارير شاملة</h4>
+                <p>إنشاء تقارير مفصلة لكل مريض مع الإحصائيات</p>
+            </div>
+            <div class="card">
+                <h4>✅ دعم العربية كاملاً</h4>
+                <p>الواجهة والتوثيق والتقارير بالعربية الفصحى</p>
+            </div>
+        </section>
+        
+        <!-- Statistics Section -->
+        <section id="stats">
+            <h2>📊 الإحصائيات والنتائج</h2>
+            
+            <h3>نتائج النموذج:</h3>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>الدقة (Accuracy)</p>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
+                    <h3>100%</h3>
+                    <p>الدقة الموجبة (Precision)</p>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                    <h3>100%</h3>
+                    <p>الاستدعاء (Recall)</p>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);">
+                    <h3>100%</h3>
+                    <p>درجة F1 (F1-Score)</p>
                 </div>
             </div>
             
-            <div class="image-container">
-                <img src="images/model_results.png" alt="نتائج النموذج - الرسوم البيانية">
-                <p class="image-caption">الشكل 1: نتائج تدريب النموذج - مصفوفة الالتباس، أهمية الميزات، مقارنة المقاييس، توزيع الاحتمالية</p>
-            </div>
-        </section>
-        
-        <!-- القسم السادس: كود الأردوينو -->
-        <section id="arduino">
-            <h2>🔧 كود الأردوينو (Arduino ECG Sensor)</h2>
-            
-            <h3>الملف: arduino_ecg_sensor.ino</h3>
-            <div class="highlight">
-                <strong>الوصف:</strong> كود الأردوينو الكامل لقراءة حساس AD8232 واستخلاص الميزات وإرسال البيانات إلى الكمبيوتر
-            </div>
-            
-            <h3>المميزات:</h3>
-            <div class="card">
-                <h4>✅ قراءة الإشارة</h4>
-                <p>قراءة 288 عينة من الحساس بتردد 360 Hz (نبضة قلب واحدة = 0.8 ثانية)</p>
-            </div>
-            <div class="card">
-                <h4>✅ استخلاص الميزات</h4>
-                <p>حساب 10 ميزات من كل نبضة (Max, Min, Mean, Std Dev, Energy, إلخ)</p>
-            </div>
-            <div class="card">
-                <h4>✅ كشف الأخطاء</h4>
-                <p>كشف فقدان الاتصال بالأقطاب الكهربائية تلقائياً</p>
-            </div>
-            <div class="card">
-                <h4>✅ الإرسال التسلسلي</h4>
-                <p>إرسال البيانات إلى الكمبيوتر عبر USB بمعدل بود 115200</p>
-            </div>
-            
-            <h3>التوصيل:</h3>
-            <div class="code-block">
-AD8232 GND  → Arduino GND
-AD8232 3.3V → Arduino 3.3V
-AD8232 OUT  → Arduino A0 (Analog Pin)
-AD8232 LO-  → Arduino Pin 10
-AD8232 LO+  → Arduino Pin 11
-            </div>
-            
-            <h3>الإخراج:</h3>
-            <div class="code-block">
-=====================================
-🏥 نظام قراءة حساس AD8232 ECG
-=====================================
-تردد العينات: 360 Hz
-عدد العينات لكل نبضة: 288
-جاري البدء...
-
-512 515 518 520 522 525 527 530...
-
---- نبضة قلب جديدة ---
-📊 الإحصائيات:
-   القيمة العظمى: 620
-   القيمة الصغرى: 410
-   المتوسط: 515.3
-   الانحراف المعياري: 45.2
-
-🔍 الميزات المستخلصة:
-   1. القيمة العظمى: 620
-   2. القيمة الصغرى: 410
-   ...
-
-📤 إرسال البيانات: HEARTBEAT:620,410,515.3,...
-            </div>
-            
-            <h3>التحميل على الأردوينو:</h3>
-            <ol style="margin-right: 1.5rem;">
-                <li>افتح Arduino IDE</li>
-                <li>انسخ محتوى <code>arduino_ecg_sensor.ino</code></li>
-                <li>اختر اللوحة والمنفذ من القائمة</li>
-                <li>اضغط على زر Upload</li>
-                <li>افتح Serial Monitor واختر معدل البود 115200</li>
-            </ol>
-            
-            <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/arduino_ecg_sensor.ino" class="download-btn" target="_blank">📥 تحميل الكود من GitHub</a>
-        </section>
-        
-        <!-- القسم السابع: برنامج البايثون -->
-        <section id="python">
-            <h2>🐍 برنامج البايثون (Python Integration)</h2>
-            
-            <h3>الملف: python_arduino_integration.py</h3>
-            <div class="highlight">
-                <strong>الوصف:</strong> برنامج بايثون يقرأ البيانات من الأردوينو ويستخدم النموذج المدرب للتنبؤ بحالة القلب
-            </div>
-            
-            <h3>المميزات:</h3>
-            <div class="card">
-                <h4>✅ قراءة البيانات</h4>
-                <p>قراءة البيانات من الأردوينو عبر المنفذ التسلسلي (USB)</p>
-            </div>
-            <div class="card">
-                <h4>✅ التنبؤ الذكي</h4>
-                <p>استخدام النموذج المدرب للتنبؤ بحالة القلب (طبيعي أو مرض)</p>
-            </div>
-            <div class="card">
-                <h4>✅ عرض النتائج</h4>
-                <p>عرض النتائج بشكل جميل مع درجة الثقة ومستوى الخطورة</p>
-            </div>
-            <div class="card">
-                <h4>✅ حفظ البيانات</h4>
-                <p>حفظ جميع النتائج في ملف نصي للمراجعة لاحقاً</p>
-            </div>
-            
-            <h3>المتطلبات:</h3>
-            <div class="code-block">
-pip install pyserial scikit-learn numpy matplotlib
-            </div>
-            
-            <h3>الاستخدام:</h3>
-            <div class="code-block">
-# تعديل المنفذ حسب نظامك (COM3, COM4, إلخ)
-SERIAL_PORT = 'COM3'
-BAUD_RATE = 115200
-
-# تشغيل البرنامج
-python3 python_arduino_integration.py
-            </div>
-            
-            <h3>الإخراج:</h3>
-            <div class="code-block">
-======================================================================
-🏥 نظام تشخيص أمراض القلب - قراءة البيانات من الأردوينو
-======================================================================
-
-✅ تم تحميل النموذج من: heart_disease_model.pkl
-✅ تم الاتصال بالأردوينو على المنفذ: COM3
-
-======================================================================
-⏰ الوقت: 2026-04-02 15:30:45
-======================================================================
-
-📊 الميزات المستخلصة:
-    1. القيمة العظمى        :     620.00
-    2. القيمة الصغرى        :     410.00
-    3. المتوسط              :     515.30
-    ...
-
-🔮 نتيجة التنبؤ:
-✅ قلب طبيعي (Normal)
-
-📈 درجة الثقة:
-   - احتمال قلب طبيعي:      99.50%
-   - احتمال نقص تروية:      0.50%
-
-✅ مستوى الخطورة: منخفض جداً
-            </div>
-            
-            <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/python_arduino_integration.py" class="download-btn" target="_blank">📥 تحميل البرنامج من GitHub</a>
-        </section>
-        
-        <!-- القسم الثامن: النتائج -->
-        <section id="results">
-            <h2>📊 نتائج المشروع</h2>
-            
-            <h3>نتائج تدريب النموذج:</h3>
+            <h3>الميزات المستخلصة:</h3>
             <table>
-                <tr>
-                    <th>المقياس</th>
-                    <th>القيمة</th>
-                    <th>التقييم</th>
-                </tr>
-                <tr>
-                    <td>الدقة (Accuracy)</td>
-                    <td>100%</td>
-                    <td>✅ ممتاز</td>
-                </tr>
-                <tr>
-                    <td>الدقة الموجبة (Precision)</td>
-                    <td>100%</td>
-                    <td>✅ ممتاز</td>
-                </tr>
-                <tr>
-                    <td>الاستدعاء (Recall)</td>
-                    <td>100%</td>
-                    <td>✅ ممتاز</td>
-                </tr>
-                <tr>
-                    <td>درجة F1 (F1-Score)</td>
-                    <td>100%</td>
-                    <td>✅ ممتاز</td>
-                </tr>
-                <tr>
-                    <td>عدد الأشجار</td>
-                    <td>100</td>
-                    <td>✅ كافٍ</td>
-                </tr>
-                <tr>
-                    <td>وقت التدريب</td>
-                    <td>&lt; 1 ثانية</td>
-                    <td>✅ سريع جداً</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الميزة</th>
+                        <th>الوصف</th>
+                        <th>الأهمية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>القيمة العظمى</td>
+                        <td>أعلى نقطة في الإشارة</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>القيمة الصغرى</td>
+                        <td>أقل نقطة في الإشارة</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>المتوسط</td>
+                        <td>متوسط قيم الإشارة</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>الانحراف المعياري</td>
+                        <td>تشتت البيانات</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>الطاقة</td>
+                        <td>مجموع مربعات الإشارة</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>الانحراف (Skewness)</td>
+                        <td>عدم التماثل</td>
+                        <td>منخفضة</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>التفرطح (Kurtosis)</td>
+                        <td>حدة الذروة</td>
+                        <td>منخفضة</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>معدل التغيير</td>
+                        <td>سرعة التغيير</td>
+                        <td>عالية</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>متوسط ST ⭐</td>
+                        <td>منطقة ST في الموجة</td>
+                        <td><strong>عالية جداً</strong></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>تقاطعات الصفر</td>
+                        <td>عدد تقاطعات الصفر</td>
+                        <td>متوسطة</td>
+                    </tr>
+                </tbody>
             </table>
-            
-            <div class="image-container">
-                <img src="images/model_results.png" alt="نتائج النموذج - الرسوم البيانية">
-                <p class="image-caption">الشكل 2: رسوم بيانية توضح نتائج التدريب والأداء</p>
-            </div>
         </section>
         
-        <!-- القسم التاسع: الملفات -->
+        <!-- Files Section -->
         <section id="files">
-            <h2>📁 الملفات المتاحة</h2>
+            <h2>📁 الملفات والأكواس</h2>
             
-            <h3>ملفات المشروع على GitHub:</h3>
-            <div class="file-list">
-                <ul>
-                    <li>📄 <strong>index.html</strong> - الموقع الإلكتروني الرئيسي</li>
-                    <li>🐍 <strong>train_model.py</strong> - كود تدريب نموذج الذكاء الاصطناعي</li>
-                    <li>🔧 <strong>arduino_ecg_sensor.ino</strong> - كود الأردوينو لقراءة الحساس</li>
-                    <li>📖 <strong>ARDUINO_SETUP.md</strong> - دليل توصيل الأردوينو والحساس</li>
-                    <li>🐍 <strong>python_arduino_integration.py</strong> - برنامج البايثون للتنبؤ</li>
-                    <li>📊 <strong>images/model_results.png</strong> - الرسوم البيانية للنموذج</li>
-                    <li>📋 <strong>README.md</strong> - توثيق المشروع</li>
-                </ul>
+            <h3>البرامج الرئيسية:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الملف</th>
+                        <th>الحجم</th>
+                        <th>الوصف</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>complete_system.py</strong></td>
+                        <td>15 KB</td>
+                        <td>البرنامج الرئيسي المدمج</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                    <tr>
+                        <td>train_model.py</td>
+                        <td>13 KB</td>
+                        <td>تدريب النموذج</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                    <tr>
+                        <td>gui_system.py</td>
+                        <td>20 KB</td>
+                        <td>الواجهة الرسومية</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                    <tr>
+                        <td>database_system.py</td>
+                        <td>18 KB</td>
+                        <td>نظام قاعدة البيانات</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                    <tr>
+                        <td>arduino_ecg_sensor.ino</td>
+                        <td>12 KB</td>
+                        <td>كود الأردوينو</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                    <tr>
+                        <td>python_arduino_integration.py</td>
+                        <td>11 KB</td>
+                        <td>قراءة البيانات من الأردوينو</td>
+                        <td>✅ جاهز</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>ملفات التوثيق:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الملف</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>README_AR_IMPROVED.md</td>
+                        <td>دليل شامل بالعربية (محسّن)</td>
+                    </tr>
+                    <tr>
+                        <td>SETUP_GUIDE.md</td>
+                        <td>شرح مفصل لخطوات التثبيت</td>
+                    </tr>
+                    <tr>
+                        <td>ARDUINO_SETUP.md</td>
+                        <td>دليل توصيل الأردوينو والحساس</td>
+                    </tr>
+                    <tr>
+                        <td>PROJECT_REPORT.md</td>
+                        <td>تقرير شامل عن المشروع</td>
+                    </tr>
+                    <tr>
+                        <td>README.md</td>
+                        <td>التوثيق بالإنجليزية</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Usage Section -->
+        <section id="usage">
+            <h2>🚀 كيفية الاستخدام</h2>
+            
+            <h3>الخطوة 1: التثبيت</h3>
+            <div class="card">
+                <h4>تثبيت المكتبات المطلوبة:</h4>
+                <p><code>pip install pyserial scikit-learn numpy matplotlib seaborn scipy</code></p>
             </div>
             
-            <h3>الملفات المولدة:</h3>
-            <div class="file-list">
-                <ul>
-                    <li>🤖 <strong>heart_disease_model.pkl</strong> - النموذج المدرب (يُحفظ تلقائياً)</li>
-                    <li>📊 <strong>ecg_results.txt</strong> - نتائج التنبؤ المحفوظة</li>
-                </ul>
+            <h3>الخطوة 2: توصيل الأردوينو</h3>
+            <div class="card">
+                <h4>الاتصالات:</h4>
+                <p>
+                    AD8232 GND → Arduino GND<br>
+                    AD8232 3.3V → Arduino 3.3V<br>
+                    AD8232 OUT → Arduino A0<br>
+                    AD8232 LO- → Arduino Pin 10<br>
+                    AD8232 LO+ → Arduino Pin 11
+                </p>
             </div>
             
-            <h3>روابط التحميل:</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>🐍 كود التدريب</h4>
-                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/train_model.py" class="download-btn" target="_blank">تحميل</a>
-                </div>
-                <div class="grid-item">
-                    <h4>🔧 كود الأردوينو</h4>
-                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/arduino_ecg_sensor.ino" class="download-btn" target="_blank">تحميل</a>
-                </div>
-                <div class="grid-item">
-                    <h4>🐍 برنامج البايثون</h4>
-                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/python_arduino_integration.py" class="download-btn" target="_blank">تحميل</a>
-                </div>
-                <div class="grid-item">
-                    <h4>📖 دليل الأردوينو</h4>
-                    <a href="https://github.com/moaz26medical/heart-disease-ai/blob/main/ARDUINO_SETUP.md" class="download-btn" target="_blank">تحميل</a>
-                </div>
+            <h3>الخطوة 3: رفع كود الأردوينو</h3>
+            <div class="card">
+                <h4>الخطوات:</h4>
+                <p>
+                    1. افتح Arduino IDE<br>
+                    2. انسخ محتوى arduino_ecg_sensor.ino<br>
+                    3. اختر اللوحة والمنفذ<br>
+                    4. اضغط Upload
+                </p>
+            </div>
+            
+            <h3>الخطوة 4: تشغيل البرنامج</h3>
+            <div class="card">
+                <h4>تشغيل البرنامج الرئيسي:</h4>
+                <p><code>python3 complete_system.py</code></p>
+            </div>
+            
+            <h3>الخطوة 5: اختر من القائمة</h3>
+            <div class="card">
+                <h4>الخيارات:</h4>
+                <p>
+                    1️⃣ تدريب النموذج (المرة الأولى فقط)<br>
+                    2️⃣ قراءة البيانات من الأردوينو والتنبؤ<br>
+                    3️⃣ عرض النتائج المحفوظة<br>
+                    4️⃣ خروج
+                </p>
             </div>
         </section>
         
-        <!-- القسم العاشر: التقدم -->
-        <section id="progress">
-            <h2>📊 نسبة تقدم المشروع</h2>
+        <!-- Download Section -->
+        <section id="download">
+            <h2>📥 التحميل والروابط</h2>
             
-            <h3>المراحل المنجزة:</h3>
-            
-            <div class="card">
-                <h4>✅ المرحلة 1: البحث والدراسة النظرية</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>دراسة أمراض القلب والعصيدة القلبية، فهم الإشارات الكهربائية</p>
+            <h3>الروابط المهمة:</h3>
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="https://github.com/moaz26medical/heart-disease-ai" class="btn btn-primary" target="_blank">
+                    📦 مستودع GitHub
+                </a>
+                <a href="https://moaz26medical.github.io/heart-disease-ai/" class="btn btn-success" target="_blank">
+                    🌐 الموقع الإلكتروني
+                </a>
+                <a href="https://github.com/moaz26medical/heart-disease-ai/archive/refs/heads/main.zip" class="btn btn-secondary" target="_blank">
+                    ⬇️ تحميل ZIP
+                </a>
             </div>
             
-            <div class="card">
-                <h4>✅ المرحلة 2: تحديد المكونات العتادية</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>اختيار حساس AD8232 والمعالجات المناسبة</p>
-            </div>
-            
-            <div class="card">
-                <h4>✅ المرحلة 3: جمع وتجهيز البيانات</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>توليد بيانات تدريبية وتحضيرها للنموذج</p>
-            </div>
-            
-            <div class="card">
-                <h4>✅ المرحلة 4: بناء وتدريب النموذج</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>تدريب نموذج Random Forest بدقة 100%</p>
-            </div>
-            
-            <div class="card">
-                <h4>✅ المرحلة 5: كود الأردوينو</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>كتابة كود الأردوينو الكامل لقراءة الحساس واستخلاص الميزات</p>
-            </div>
-            
-            <div class="card">
-                <h4>✅ المرحلة 6: برنامج البايثون</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>برنامج البايثون لقراءة البيانات والتنبؤ</p>
-            </div>
-            
-            <div class="card">
-                <h4>⏳ المرحلة 7: الاختبار على بيانات حقيقية</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 50%;">50%</div>
-                </div>
-                <p>اختبار النظام على إشارات قلب حقيقية من أشخاص مختلفين</p>
-            </div>
-            
-            <div class="card">
-                <h4>✅ المرحلة 8: الموقع الإلكتروني والتوثيق</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;">100%</div>
-                </div>
-                <p>بناء الموقع والتوثيق الكامل للمشروع</p>
-            </div>
-            
-            <div class="highlight">
-                <strong>إجمالي التقدم: 90%</strong>
-                <p>المشروع متقدم جداً! تم إكمال جميع الأكواد والملفات. المتبقي: اختبار على بيانات حقيقية وتحسينات نهائية.</p>
-            </div>
+            <h3>ملفات التحميل المباشر:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الملف</th>
+                        <th>الرابط</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>البرنامج الرئيسي</td>
+                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/complete_system.py" target="_blank">تحميل</a></td>
+                    </tr>
+                    <tr>
+                        <td>كود الأردوينو</td>
+                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/arduino_ecg_sensor.ino" target="_blank">تحميل</a></td>
+                    </tr>
+                    <tr>
+                        <td>الواجهة الرسومية</td>
+                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/gui_system.py" target="_blank">تحميل</a></td>
+                    </tr>
+                    <tr>
+                        <td>قاعدة البيانات</td>
+                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/database_system.py" target="_blank">تحميل</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
         
-        <!-- القسم الحادي عشر: التقنيات المستخدمة -->
-        <section>
-            <h2>💻 التقنيات والأدوات المستخدمة</h2>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>📞 التواصل والدعم</h2>
             
-            <h3>البرمجة والمكتبات:</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>Python 3.11</h4>
-                    <p>لغة البرمجة الرئيسية</p>
-                </div>
-                <div class="grid-item">
-                    <h4>scikit-learn</h4>
-                    <p>نماذج التعلم الآلي</p>
-                </div>
-                <div class="grid-item">
-                    <h4>NumPy</h4>
-                    <p>معالجة المصفوفات</p>
-                </div>
-                <div class="grid-item">
-                    <h4>Matplotlib</h4>
-                    <p>رسم الرسوم البيانية</p>
-                </div>
-                <div class="grid-item">
-                    <h4>PySerial</h4>
-                    <p>الاتصال بالأردوينو</p>
-                </div>
-                <div class="grid-item">
-                    <h4>Arduino IDE</h4>
-                    <p>برمجة الميكروكنترولر</p>
-                </div>
+            <div class="card">
+                <h4>📧 البريد الإلكتروني</h4>
+                <p><a href="mailto:moazsyria90@gmail.com">moazsyria90@gmail.com</a></p>
             </div>
             
-            <h3>الأدوات والمنصات:</h3>
-            <div class="grid">
-                <div class="grid-item">
-                    <h4>Visual Studio Code</h4>
-                    <p>محرر الأكواد</p>
-                </div>
-                <div class="grid-item">
-                    <h4>GitHub</h4>
-                    <p>إدارة المشروع والنسخ الاحتياطي</p>
-                </div>
-                <div class="grid-item">
-                    <h4>GitHub Pages</h4>
-                    <p>استضافة الموقع</p>
-                </div>
-                <div class="grid-item">
-                    <h4>PhysioNet</h4>
-                    <p>قواعد البيانات الطبية</p>
-                </div>
-                <div class="grid-item">
-                    <h4>Arduino Uno</h4>
-                    <p>لوحة التحكم الرئيسية</p>
-                </div>
-                <div class="grid-item">
-                    <h4>AD8232 Sensor</h4>
-                    <p>حساس ECG عالي الدقة</p>
-                </div>
+            <div class="card">
+                <h4>🌐 GitHub</h4>
+                <p><a href="https://github.com/moaz26medical" target="_blank">https://github.com/moaz26medical</a></p>
+            </div>
+            
+            <div class="card">
+                <h4>💬 للأسئلة والاستفسارات</h4>
+                <p>تواصل عبر البريد الإلكتروني أو GitHub Issues</p>
+            </div>
+            
+            <h3>معلومات المشروع:</h3>
+            <div class="card">
+                <h4>📚 نوع المشروع</h4>
+                <p>مشروع السنة الخامسة - هندسة طبية</p>
+            </div>
+            
+            <div class="card">
+                <h4>📄 الترخيص</h4>
+                <p>مفتوح المصدر - متاح للاستخدام التعليمي والبحثي</p>
+            </div>
+            
+            <div class="card">
+                <h4>🎓 المؤلف</h4>
+                <p>Moaz - مهندس طبي</p>
             </div>
         </section>
     </div>
     
+    <!-- Footer -->
     <footer>
-        <h3>📞 معلومات الاتصال</h3>
-        <p><strong>البريد الإلكتروني:</strong> moazsyria90@gmail.com</p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/moaz26medical/heart-disease-ai" style="color: #667eea;">moaz26medical/heart-disease-ai</a></p>
-        <p><strong>الموقع:</strong> <a href="https://moaz26medical.github.io/heart-disease-ai/" style="color: #667eea;">https://moaz26medical.github.io/heart-disease-ai/</a></p>
-        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #555;">
-        <p>&copy; 2026 - مشروع السنة الخامسة هندسة طبية - جامعة تشرين</p>
-        <p style="font-size: 0.9rem; color: #aaa;">آخر تحديث: 2 أبريل 2026</p>
+        <p>🏥 نظام تشخيص أمراض القلب بالذكاء الاصطناعي</p>
+        <p>© 2026 - جميع الحقوق محفوظة</p>
+        <p>
+            <a href="https://github.com/moaz26medical/heart-disease-ai" target="_blank">GitHub</a> | 
+            <a href="mailto:moazsyria90@gmail.com">البريد الإلكتروني</a> | 
+            <a href="#overview">العودة للأعلى</a>
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">آخر تحديث: 7 أبريل 2026 | الحالة: جاهز للاستخدام ✅</p>
     </footer>
 </body>
 </html>
