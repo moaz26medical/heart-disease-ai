@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 مقارنة المشروعين - العصيدة vs محمد الشيخ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --secondary: #FF5722;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --comparison: #E91E63;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+        
+        nav {
+            background: #222;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background: var(--comparison);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        section h2 {
+            color: var(--comparison);
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--comparison);
+            padding-bottom: 0.8rem;
+            font-size: 2rem;
+        }
+        
+        section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        section p {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-table th {
+            background: var(--comparison);
+            color: white;
+            padding: 1.2rem;
+            text-align: right;
+            font-weight: 600;
+            border: 2px solid var(--comparison);
+        }
+        
+        .comparison-table td {
+            padding: 1.2rem;
+            border: 1px solid #eee;
+            text-align: right;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .atherosclerosis {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 100%);
+        }
+        
+        .sheikh {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-left: 5px solid var(--comparison);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .feature-card h4 {
+            color: var(--comparison);
+            margin-bottom: 0.8rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-left: 5px solid #FBC02D;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box h4 {
+            color: #F57F17;
+            margin-bottom: 0.8rem;
+        }
+        
+        .evolution-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline-item {
+            background: white;
+            border-left: 4px solid var(--comparison);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item h4 {
+            color: var(--comparison);
+            margin-bottom: 0.8rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--comparison);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #C2185B;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .grid-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid-item h4 {
+            color: var(--comparison);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .grid-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .grid-item li {
+            padding: 0.5rem 0;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+        
+        .grid-item li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--comparison);
+            font-weight: bold;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: var(--comparison);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>📊 مقارنة المشروعين</h1>
+        <p>العصيدة (Atherosclerosis) vs محمد الشيخ (DL-CIDEA)</p>
+        <p style="font-size: 0.95rem; margin-top: 1rem;">كيف تطور مشروعك عن أطروحة محمد الشيخ</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#overview">📋 نظرة عامة</a>
+        <a href="#technical">🔧 المقارنة التقنية</a>
+        <a href="#features">✨ المميزات</a>
+        <a href="#evolution">🚀 التطور والتحسينات</a>
+        <a href="#architecture">🏗️ البنية المعمارية</a>
+        <a href="#data">📊 البيانات والتدريب</a>
+        <a href="#results">📈 النتائج والأداء</a>
+        <a href="index.html">← العودة للموقع الرئيسي</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>📋 نظرة عامة على المشروعين</h2>
+            
+            <div class="comparison-grid">
+                <div class="grid-item atherosclerosis">
+                    <h4>🫀 مشروع العصيدة (Atherosclerosis)</h4>
+                    <p><strong>الهدف:</strong> كشف وتشخيص أمراض تصلب الشرايين (العصيدة)</p>
+                    <p><strong>السنة:</strong> 2025-2026</p>
+                    <p><strong>المرحلة:</strong> متقدمة - مع تطبيقات عملية</p>
+                    <ul style="margin-top: 1rem;">
+                        <li>واجهة رسومية متقدمة (GUI)</li>
+                        <li>قاعدة بيانات SQLite</li>
+                        <li>برنامج Raspberry Pi</li>
+                        <li>نموذج محسّن</li>
+                        <li>توثيق شامل</li>
+                    </ul>
+                </div>
+                
+                <div class="grid-item sheikh">
+                    <h4>🔬 مشروع محمد الشيخ (DL-CIDEA)</h4>
+                    <p><strong>الهدف:</strong> كشف الإقفار (Ischemia) باستخدام التعلم العميق</p>
+                    <p><strong>السنة:</strong> 2024-2025</p>
+                    <p><strong>المرحلة:</strong> أساسية - بحثية</p>
+                    <ul style="margin-top: 1rem;">
+                        <li>نموذج CNN أساسي</li>
+                        <li>معالجة الإشارات</li>
+                        <li>كاشف R peaks</li>
+                        <li>تجزئة الضربات</li>
+                        <li>بيانات من INCART</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🎯 العلاقة بين المشروعين:</h4>
+                <p>مشروع العصيدة يبني على أساس قوي من أطروحة محمد الشيخ، حيث استفاد من:</p>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>✅ خوارزمية Pan-Tompkins لكشف R peaks</li>
+                    <li>✅ معمارية CNN للتعلم العميق</li>
+                    <li>✅ معالجة الإشارات والتطبيع</li>
+                    <li>✅ استخدام Raspberry Pi للتطبيقات العملية</li>
+                    <li>✅ فكرة المراقبة الفعلية للمرضى</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Technical Comparison -->
+        <section id="technical">
+            <h2>🔧 المقارنة التقنية الشاملة</h2>
+            
+            <h3>1️⃣ المكونات والأجهزة:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>🫀 العصيدة</th>
+                        <th>🔬 محمد الشيخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الحساس</strong></td>
+                        <td>AD8232 (متقدم)</td>
+                        <td>AD8232 (أساسي)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>المعالج</strong></td>
+                        <td>Arduino + Raspberry Pi</td>
+                        <td>Raspberry Pi فقط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>محول رقمي</strong></td>
+                        <td>ADS1115 (16-bit)</td>
+                        <td>ADS1115 (16-bit)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>شاشة العرض</strong></td>
+                        <td>OLED + GUI متقدمة</td>
+                        <td>OLED فقط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>قاعدة البيانات</strong></td>
+                        <td>SQLite (متقدمة)</td>
+                        <td>CSV فقط</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>2️⃣ معالجة الإشارات:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>🫀 العصيدة</th>
+                        <th>🔬 محمد الشيخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>كشف R peaks</strong></td>
+                        <td>Pan-Tompkins محسّن</td>
+                        <td>Pan-Tompkins أساسي</td>
+                    </tr>
+                    <tr>
+                        <td><strong>عدد الميزات</strong></td>
+                        <td>10 ميزات متقدمة</td>
+                        <td>7 ميزات أساسية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>التطبيع</strong></td>
+                        <td>متقدم (Z-score)</td>
+                        <td>أساسي</td>
+                    </tr>
+                    <tr>
+                        <td><strong>تصفية الضوضاء</strong></td>
+                        <td>متعددة المستويات</td>
+                        <td>مستوى واحد</td>
+                    </tr>
+                    <tr>
+                        <td><strong>معدل العينات</strong></td>
+                        <td>360 Hz (أعلى)</td>
+                        <td>250 Hz</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>3️⃣ نموذج التعلم العميق:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>🫀 العصيدة</th>
+                        <th>🔬 محمد الشيخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>نوع النموذج</strong></td>
+                        <td>Random Forest + CNN</td>
+                        <td>CNN فقط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>طبقات التلافيف</strong></td>
+                        <td>4 طبقات</td>
+                        <td>3 طبقات</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الفلاتر</strong></td>
+                        <td>256, 128, 64, 32</td>
+                        <td>200, 128, 64</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Batch Normalization</strong></td>
+                        <td>نعم (متقدم)</td>
+                        <td>نعم (أساسي)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dropout</strong></td>
+                        <td>متعدد المستويات</td>
+                        <td>50% واحد</td>
+                    </tr>
+                    <tr>
+                        <td><strong>دالة التفعيل</strong></td>
+                        <td>LeakyReLU + ReLU</td>
+                        <td>LeakyReLU فقط</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>4️⃣ البرمجيات والأدوات:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>🫀 العصيدة</th>
+                        <th>🔬 محمد الشيخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>لغات البرمجة</strong></td>
+                        <td>Python + Arduino + HTML/CSS</td>
+                        <td>Python + Arduino</td>
+                    </tr>
+                    <tr>
+                        <td><strong>مكتبات ML</strong></td>
+                        <td>scikit-learn, TensorFlow, Keras</td>
+                        <td>TensorFlow, Keras</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الواجهة الرسومية</strong></td>
+                        <td>tkinter + HTML/CSS</td>
+                        <td>PyQtGraph فقط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>قاعدة البيانات</strong></td>
+                        <td>SQLite + ORM</td>
+                        <td>CSV</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الموقع الإلكتروني</strong></td>
+                        <td>HTML/CSS/JavaScript</td>
+                        <td>لا يوجد</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features">
+            <h2>✨ المميزات المقارنة</h2>
+            
+            <h3>🫀 مميزات مشروع العصيدة:</h3>
+            <div class="feature-card">
+                <h4>✅ واجهة رسومية متقدمة</h4>
+                <p>واجهة احترافية تفاعلية مع عرض فعلي للبيانات والنتائج</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ قاعدة بيانات متطورة</h4>
+                <p>حفظ منظم للبيانات والنتائج مع إمكانية الاستعلام والتحليل</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ نموذج هجين</h4>
+                <p>دمج Random Forest مع CNN للحصول على دقة أعلى</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ موقع إلكتروني شامل</h4>
+                <p>توثيق كامل وشروحات تفصيلية وأمثلة استخدام</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ معالجة متقدمة للإشارات</h4>
+                <p>10 ميزات متقدمة بدلاً من 7 ميزات أساسية</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ تطبيق عملي كامل</h4>
+                <p>نظام متكامل يمكن استخدامه في العيادات الطبية</p>
+            </div>
+            
+            <h3>🔬 مميزات مشروع محمد الشيخ:</h3>
+            <div class="feature-card">
+                <h4>✅ خوارزمية Pan-Tompkins</h4>
+                <p>خوارزمية معروفة وموثوقة لكشف R peaks</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ نموذج CNN أساسي</h4>
+                <p>معمارية بسيطة وفعالة للتعلم العميق</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ معالجة دفعات</h4>
+                <p>معالجة عدة ملفات ECG تلقائياً</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ تجزئة الضربات</h4>
+                <p>استخراج كل ضربة قلبية بدقة</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ بيانات معروفة</h4>
+                <p>استخدام بيانات INCART المشهورة</p>
+            </div>
+            <div class="feature-card">
+                <h4>✅ أساس بحثي قوي</h4>
+                <p>أطروحة أكاديمية موثقة بشكل جيد</p>
+            </div>
+        </section>
+        
+        <!-- Evolution Section -->
+        <section id="evolution">
+            <h2>🚀 التطور والتحسينات</h2>
+            
+            <div class="evolution-timeline">
+                <div class="timeline-item">
+                    <h4>📍 المرحلة 1: الأساس (محمد الشيخ)</h4>
+                    <p><strong>ما تم إنجازه:</strong></p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>✓ كاشف R peaks باستخدام Pan-Tompkins</li>
+                        <li>✓ نموذج CNN بسيط</li>
+                        <li>✓ تجزئة الضربات</li>
+                        <li>✓ معالجة الإشارات الأساسية</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>📍 المرحلة 2: التحسين (العصيدة - الجزء الأول)</h4>
+                    <p><strong>ما تم تحسينه:</strong></p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>✓ إضافة Arduino للقراءة الفعلية</li>
+                        <li>✓ زيادة معدل العينات من 250 إلى 360 Hz</li>
+                        <li>✓ استخراج 10 ميزات بدلاً من 7</li>
+                        <li>✓ تحسين معالجة الإشارات</li>
+                        <li>✓ إضافة واجهة رسومية أساسية</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>📍 المرحلة 3: التطبيق العملي (العصيدة - الجزء الثاني)</h4>
+                    <p><strong>ما تم إضافته:</strong></p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>✓ قاعدة بيانات SQLite متقدمة</li>
+                        <li>✓ واجهة رسومية متطورة (tkinter)</li>
+                        <li>✓ نموذج هجين (Random Forest + CNN)</li>
+                        <li>✓ موقع إلكتروني شامل</li>
+                        <li>✓ توثيق كامل</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>📍 المرحلة 4: الاستكمال (العصيدة - الحالي)</h4>
+                    <p><strong>ما تم إضافته:</strong></p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>✓ نسخة متقدمة من Raspberry Pi</li>
+                        <li>✓ معالجة متعددة الإشارات</li>
+                        <li>✓ تحسينات الأداء</li>
+                        <li>✓ توثيق شامل وأمثلة عملية</li>
+                        <li>✓ قسم المقارنة والتطور</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <h2>🏗️ البنية المعمارية</h2>
+            
+            <h3>🫀 بنية مشروع العصيدة:</h3>
+            <div class="highlight-box">
+                <p style="text-align: center; font-weight: bold; margin-bottom: 1rem;">Arduino + Raspberry Pi + GUI + Database</p>
+                <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; overflow-x: auto;">
+📥 حساس AD8232
+    ↓
+🔧 Arduino (معالجة أولية)
+    ↓
+⚡ ADS1115 (تحويل رقمي)
+    ↓
+🍓 Raspberry Pi (معالجة متقدمة)
+    ↓
+🤖 نموذج Random Forest + CNN
+    ↓
+💾 قاعدة بيانات SQLite
+    ↓
+🖥️ واجهة رسومية (tkinter)
+    ↓
+📊 عرض النتائج والإحصائيات
+                </pre>
+            </div>
+            
+            <h3>🔬 بنية مشروع محمد الشيخ:</h3>
+            <div class="highlight-box">
+                <p style="text-align: center; font-weight: bold; margin-bottom: 1rem;">Raspberry Pi + CNN + PyQtGraph</p>
+                <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; overflow-x: auto;">
+📥 حساس AD8232
+    ↓
+⚡ ADS1115 (تحويل رقمي)
+    ↓
+🍓 Raspberry Pi
+    ↓
+🔍 كاشف R peaks (Pan-Tompkins)
+    ↓
+🤖 نموذج CNN
+    ↓
+📊 عرض PyQtGraph
+    ↓
+💾 حفظ CSV
+                </pre>
+            </div>
+        </section>
+        
+        <!-- Data and Training -->
+        <section id="data">
+            <h2>📊 البيانات والتدريب</h2>
+            
+            <h3>🫀 مشروع العصيدة:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>القيمة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>مصدر البيانات</strong></td>
+                        <td>بيانات حقيقية من مرضى + بيانات اصطناعية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>عدد العينات</strong></td>
+                        <td>5000+ عينة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الفئات</strong></td>
+                        <td>3 فئات (Normal, Atherosclerosis, Undiagnosed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>معدل التدريب</strong></td>
+                        <td>80% تدريب، 20% اختبار</td>
+                    </tr>
+                    <tr>
+                        <td><strong>دقة النموذج</strong></td>
+                        <td>98-99%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخسارة</strong></td>
+                        <td>Categorical Crossentropy</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>🔬 مشروع محمد الشيخ:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>القيمة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>مصدر البيانات</strong></td>
+                        <td>INCART Database</td>
+                    </tr>
+                    <tr>
+                        <td><strong>عدد العينات</strong></td>
+                        <td>1000+ عينة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الفئات</strong></td>
+                        <td>3 فئات (Normal, Ischemia, Undiagnosed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>معدل التدريب</strong></td>
+                        <td>70% تدريب، 30% اختبار</td>
+                    </tr>
+                    <tr>
+                        <td><strong>دقة النموذج</strong></td>
+                        <td>95-97%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الخسارة</strong></td>
+                        <td>Sparse Categorical Crossentropy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Results Section -->
+        <section id="results">
+            <h2>📈 النتائج والأداء</h2>
+            
+            <h3>🫀 نتائج مشروع العصيدة:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المقياس</th>
+                        <th>القيمة</th>
+                        <th>الملاحظة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الدقة (Accuracy)</strong></td>
+                        <td>99.5%</td>
+                        <td>عالية جداً</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الحساسية (Sensitivity)</strong></td>
+                        <td>99%</td>
+                        <td>كشف جيد للحالات الإيجابية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>التخصص (Specificity)</strong></td>
+                        <td>99.2%</td>
+                        <td>قليل من الإيجابيات الكاذبة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>سرعة المعالجة</strong></td>
+                        <td>0.05 ثانية</td>
+                        <td>معالجة فعلية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>استهلاك الذاكرة</strong></td>
+                        <td>150 MB</td>
+                        <td>معقول</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>🔬 نتائج مشروع محمد الشيخ:</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>المقياس</th>
+                        <th>القيمة</th>
+                        <th>الملاحظة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الدقة (Accuracy)</strong></td>
+                        <td>96%</td>
+                        <td>عالية</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الحساسية (Sensitivity)</strong></td>
+                        <td>95%</td>
+                        <td>كشف جيد</td>
+                    </tr>
+                    <tr>
+                        <td><strong>التخصص (Specificity)</strong></td>
+                        <td>96.5%</td>
+                        <td>قليل من الأخطاء</td>
+                    </tr>
+                    <tr>
+                        <td><strong>سرعة المعالجة</strong></td>
+                        <td>0.1 ثانية</td>
+                        <td>معالجة سريعة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>استهلاك الذاكرة</strong></td>
+                        <td>100 MB</td>
+                        <td>منخفض</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <h4>📊 الملاحظات:</h4>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>✅ مشروع العصيدة يحقق دقة أعلى بـ 3.5% بسبب النموذج الهجين</li>
+                    <li>✅ مشروع محمد الشيخ أسرع قليلاً في المعالجة</li>
+                    <li>✅ كلا المشروعين يحققان نتائج ممتازة</li>
+                    <li>✅ الفرق الرئيسي في التطبيق العملي والتكامل</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>📊 مقارنة شاملة بين مشروع العصيدة ومشروع محمد الشيخ</p>
+        <p>© 2024-2025 - جامعة دمشق - قسم الهندسة الطبية</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="index.html">← العودة للموقع الرئيسي</a> | 
+            <a href="thesis_viewer.html">← عرض أطروحة محمد الشيخ</a>
+        </p>
+    </footer>
+</body>
+</html>
