@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 نموذج التعلم العميق - محمد الشيخ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --secondary: #FF5722;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+        
+        nav {
+            background: #222;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 0.8rem;
+            font-size: 2rem;
+        }
+        
+        section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        section p {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        
+        .architecture {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .layer {
+            background: linear-gradient(135deg, var(--primary) 0%, #1976D2 100%);
+            color: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .layer.activation {
+            background: linear-gradient(135deg, var(--secondary) 0%, #E64A19 100%);
+        }
+        
+        .layer.pooling {
+            background: linear-gradient(135deg, var(--success) 0%, #45a049 100%);
+        }
+        
+        .layer.dense {
+            background: linear-gradient(135deg, var(--warning) 0%, #F57C00 100%);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        
+        .comparison-table {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-table h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>🤖 نموذج التعلم العميق</h1>
+        <p>Deep Learning CNN Model for ECG Analysis</p>
+        <p style="font-size: 0.95rem; margin-top: 1rem;">من أطروحة محمد الشيخ - DL-CIDEA</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#overview">📋 نظرة عامة</a>
+        <a href="#architecture">🏗️ البنية المعمارية</a>
+        <a href="#layers">🔧 الطبقات</a>
+        <a href="#code">💻 الكود</a>
+        <a href="#usage">🚀 الاستخدام</a>
+        <a href="#comparison">📊 المقارنة</a>
+        <a href="thesis_viewer.html">📚 العودة للأطروحة</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>📋 نظرة عامة على النموذج</h2>
+            
+            <div class="highlight-box">
+                <h4>🎯 الهدف:</h4>
+                <p>بناء نموذج شبكة عصبية عميقة (CNN) لتحليل إشارات ECG والكشف عن أمراض القلب</p>
+            </div>
+            
+            <h3>مميزات النموذج:</h3>
+            <ul style="margin: 1rem 0; padding-right: 2rem;">
+                <li>✅ <strong>معمارية CNN متقدمة:</strong> استخدام طبقات التلافيف (Convolution) للكشف عن الأنماط</li>
+                <li>✅ <strong>تطبيع الدفعات:</strong> BatchNormalization لتحسين الاستقرار والأداء</li>
+                <li>✅ <strong>تفعيل LeakyReLU:</strong> لتجنب مشكلة الـ Dead Neurons</li>
+                <li>✅ <strong>Dropout:</strong> لتقليل الـ Overfitting</li>
+                <li>✅ <strong>تحويل إلى TFLite:</strong> لنشر على الأجهزة المحمولة</li>
+            </ul>
+            
+            <h3>المدخلات والمخرجات:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>القيمة</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>طول الإشارة</strong></td>
+                        <td>200 عينة</td>
+                        <td>عدد النقاط في إشارة ECG</td>
+                    </tr>
+                    <tr>
+                        <td><strong>عدد الفئات</strong></td>
+                        <td>3 فئات</td>
+                        <td>الحالات المختلفة (طبيعي، مرض 1، مرض 2)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>المخرج</strong></td>
+                        <td>Softmax</td>
+                        <td>احتمالية كل فئة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>دالة الخسارة</strong></td>
+                        <td>Sparse Categorical Crossentropy</td>
+                        <td>للتصنيف متعدد الفئات</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Architecture Section -->
+        <section id="architecture">
+            <h2>🏗️ البنية المعمارية</h2>
+            
+            <div class="architecture">
+                <h3>معمارية الشبكة:</h3>
+                
+                <div class="layer">📥 Input: (200, 1)</div>
+                
+                <div class="layer">🔵 Conv1D: 200 filters, kernel=7</div>
+                <div class="layer activation">🔴 LeakyReLU (α=0.1)</div>
+                <div class="layer">⚪ BatchNormalization</div>
+                <div class="layer pooling">🟢 MaxPooling1D: pool_size=2</div>
+                
+                <div class="layer">🔵 Conv1D: 128 filters, kernel=5</div>
+                <div class="layer activation">🔴 LeakyReLU (α=0.1)</div>
+                <div class="layer">⚪ BatchNormalization</div>
+                <div class="layer pooling">🟢 MaxPooling1D: pool_size=2</div>
+                
+                <div class="layer">🔵 Conv1D: 64 filters, kernel=5</div>
+                <div class="layer activation">🔴 LeakyReLU (α=0.1)</div>
+                <div class="layer">⚪ BatchNormalization</div>
+                <div class="layer pooling">🟢 MaxPooling1D: pool_size=2</div>
+                
+                <div class="layer">📊 Flatten</div>
+                
+                <div class="layer dense">🟠 Dense: 64 units</div>
+                <div class="layer activation">🔴 LeakyReLU (α=0.1)</div>
+                <div class="layer">🔒 Dropout: 0.5</div>
+                
+                <div class="layer dense">🟠 Dense: 3 units (Softmax)</div>
+                
+                <div class="layer" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">📤 Output: 3 classes</div>
+            </div>
+            
+            <h3>شرح المعمارية:</h3>
+            <div class="highlight-box">
+                <h4>🔵 طبقات التلافيف (Convolution):</h4>
+                <p>تستخدم لاستخراج الميزات من الإشارة. تبدأ بـ 200 فلتر ثم تقل إلى 128 و 64 لتقليل الأبعاد تدريجياً.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🔴 تفعيل LeakyReLU:</h4>
+                <p>بدلاً من ReLU العادي، يستخدم LeakyReLU لتجنب مشكلة الخلايا الميتة (Dead Neurons) حيث يسمح بتمرير قيم سالبة صغيرة.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>⚪ تطبيع الدفعات (Batch Normalization):</h4>
+                <p>يحسن من استقرار التدريب ويسمح بمعدلات تعلم أعلى، مما يسرع التقارب.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🟢 تجميع الحد الأقصى (Max Pooling):</h4>
+                <p>يقلل من حجم البيانات ويحافظ على أهم الميزات، مما يقلل من الحسابات والذاكرة.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🔒 Dropout:</h4>
+                <p>يقلل من الـ Overfitting بإيقاف عشوائي لـ 50% من الخلايا العصبية أثناء التدريب.</p>
+            </div>
+        </section>
+        
+        <!-- Layers Section -->
+        <section id="layers">
+            <h2>🔧 تفاصيل الطبقات</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الطبقة</th>
+                        <th>المعاملات</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Conv1D</td>
+                        <td>200 filters, kernel=7</td>
+                        <td>استخراج الميزات الأولية</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>LeakyReLU</td>
+                        <td>α=0.1</td>
+                        <td>تفعيل غير خطي</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>BatchNormalization</td>
+                        <td>-</td>
+                        <td>تطبيع المدخلات</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>MaxPooling1D</td>
+                        <td>pool_size=2</td>
+                        <td>تقليل الأبعاد</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Conv1D</td>
+                        <td>128 filters, kernel=5</td>
+                        <td>استخراج ميزات متقدمة</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>LeakyReLU</td>
+                        <td>α=0.1</td>
+                        <td>تفعيل غير خطي</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>BatchNormalization</td>
+                        <td>-</td>
+                        <td>تطبيع المدخلات</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>MaxPooling1D</td>
+                        <td>pool_size=2</td>
+                        <td>تقليل الأبعاد</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Conv1D</td>
+                        <td>64 filters, kernel=5</td>
+                        <td>استخراج ميزات عميقة</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>LeakyReLU</td>
+                        <td>α=0.1</td>
+                        <td>تفعيل غير خطي</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>BatchNormalization</td>
+                        <td>-</td>
+                        <td>تطبيع المدخلات</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>MaxPooling1D</td>
+                        <td>pool_size=2</td>
+                        <td>تقليل الأبعاد</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Flatten</td>
+                        <td>-</td>
+                        <td>تسطيح البيانات</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Dense</td>
+                        <td>64 units</td>
+                        <td>طبقة كاملة</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>LeakyReLU</td>
+                        <td>α=0.1</td>
+                        <td>تفعيل غير خطي</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Dropout</td>
+                        <td>rate=0.5</td>
+                        <td>تقليل الـ Overfitting</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Dense</td>
+                        <td>3 units, softmax</td>
+                        <td>طبقة الإخراج</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Code Section -->
+        <section id="code">
+            <h2>💻 الكود</h2>
+            
+            <h3>بناء النموذج:</h3>
+            <div class="code-block">
+                <pre>import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import (
+    Conv1D, MaxPooling1D, Flatten, Dense, 
+    Dropout, BatchNormalization, LeakyReLU
+)
+
+fixed_len = 200
+num_classes = 3
+
+model = Sequential([
+    Conv1D(200, 7, input_shape=(fixed_len, 1)),
+    LeakyReLU(alpha=0.1),
+    BatchNormalization(),
+    MaxPooling1D(2),
+    
+    Conv1D(128, 5),
+    LeakyReLU(alpha=0.1),
+    BatchNormalization(),
+    MaxPooling1D(2),
+    
+    Conv1D(64, 5),
+    LeakyReLU(alpha=0.1),
+    BatchNormalization(),
+    MaxPooling1D(2),
+    
+    Flatten(),
+    Dense(64),
+    LeakyReLU(alpha=0.1),
+    Dropout(0.5),
+    Dense(num_classes, activation="softmax"),
+])</pre>
+            </div>
+            
+            <h3>تجميع النموذج:</h3>
+            <div class="code-block">
+                <pre>model.compile(
+    optimizer="adam",
+    loss="sparse_categorical_crossentropy",
+    metrics=["accuracy"]
+)</pre>
+            </div>
+            
+            <h3>حفظ النموذج:</h3>
+            <div class="code-block">
+                <pre>save_dir = r"C:\Users\Mohammed\Desktop\DL-CIDEA_model\SavedModels"
+os.makedirs(save_dir, exist_ok=True)
+
+# حفظ بصيغة H5
+h5_path = os.path.join(save_dir, "ecg_cnn_full_model.h5")
+model.save(h5_path)
+
+# تحويل إلى TFLite
+model_loaded = tf.keras.models.load_model(h5_path)
+converter = tf.lite.TFLiteConverter.from_keras_model(model_loaded)
+converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS,
+    tf.lite.OpsSet.SELECT_TF_OPS,
+]
+tflite_model = converter.convert()
+
+# حفظ TFLite
+tflite_path = os.path.join(save_dir, "ecg_cnn_model.tflite")
+with open(tflite_path, "wb") as f:
+    f.write(tflite_model)</pre>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>📥 تحميل الملف الكامل:</h4>
+                <p>
+                    <a href="Mohammad_AlSheikh_DeepLearningModel.py" class="btn btn-primary" download>⬇️ تحميل الكود الكامل</a>
+                </p>
+            </div>
+        </section>
+        
+        <!-- Usage Section -->
+        <section id="usage">
+            <h2>🚀 الاستخدام</h2>
+            
+            <h3>التدريب:</h3>
+            <div class="code-block">
+                <pre>model.fit(
+    X_train, y_train,
+    epochs=50,
+    batch_size=32,
+    validation_split=0.2,
+    verbose=1
+)</pre>
+            </div>
+            
+            <h3>التنبؤ:</h3>
+            <div class="code-block">
+                <pre>predictions = model.predict(X_test)
+predicted_classes = np.argmax(predictions, axis=1)
+confidence = np.max(predictions, axis=1)</pre>
+            </div>
+            
+            <h3>التقييم:</h3>
+            <div class="code-block">
+                <pre>loss, accuracy = model.evaluate(X_test, y_test)
+print(f"Accuracy: {accuracy*100:.2f}%")</pre>
+            </div>
+            
+            <h3>استخدام النموذج المحفوظ:</h3>
+            <div class="code-block">
+                <pre># تحميل النموذج
+loaded_model = tf.keras.models.load_model('ecg_cnn_full_model.h5')
+
+# التنبؤ
+predictions = loaded_model.predict(new_data)
+result = np.argmax(predictions[0])
+
+# النتيجة
+classes = ["Normal", "Disease 1", "Disease 2"]
+print(f"Predicted: {classes[result]}")</pre>
+            </div>
+        </section>
+        
+        <!-- Comparison Section -->
+        <section id="comparison">
+            <h2>📊 المقارنة مع طرق أخرى</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>المعيار</th>
+                        <th>CNN (محمد الشيخ)</th>
+                        <th>Random Forest (مشروعك)</th>
+                        <th>SVM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>التعقيد</strong></td>
+                        <td>عالي جداً</td>
+                        <td>متوسط</td>
+                        <td>متوسط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الدقة</strong></td>
+                        <td>عالية جداً (&gt;95%)</td>
+                        <td>عالية (100%)</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>سرعة التدريب</strong></td>
+                        <td>بطيء (يحتاج GPU)</td>
+                        <td>سريع</td>
+                        <td>متوسط</td>
+                    </tr>
+                    <tr>
+                        <td><strong>سرعة التنبؤ</strong></td>
+                        <td>سريع</td>
+                        <td>سريع جداً</td>
+                        <td>سريع</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الذاكرة</strong></td>
+                        <td>عالية</td>
+                        <td>منخفضة</td>
+                        <td>متوسطة</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الاستهلاك</strong></td>
+                        <td>عالي</td>
+                        <td>منخفض جداً</td>
+                        <td>متوسط</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>متى تستخدم كل طريقة؟</h3>
+            <div class="highlight-box">
+                <h4>🤖 CNN (محمد الشيخ):</h4>
+                <p>✅ عندما تريد أفضل دقة ممكنة ولديك موارد حسابية كافية</p>
+                <p>✅ للتطبيقات التي تتطلب دقة عالية جداً</p>
+                <p>✅ عندما يكون لديك بيانات كثيرة للتدريب</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🌳 Random Forest (مشروعك):</h4>
+                <p>✅ عندما تريد حل سريع وفعال</p>
+                <p>✅ للأجهزة ذات الموارد المحدودة (Arduino, Raspberry Pi)</p>
+                <p>✅ عندما تريد نموذج سهل الفهم والصيانة</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>🤖 نموذج التعلم العميق من أطروحة محمد الشيخ</p>
+        <p>© 2024-2025 - جامعة دمشق - قسم الهندسة الطبية</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="index.html">← العودة للموقع الرئيسي</a> | 
+            <a href="thesis_viewer.html">← عرض الأطروحة</a>
+        </p>
+    </footer>
+</body>
+</html>
