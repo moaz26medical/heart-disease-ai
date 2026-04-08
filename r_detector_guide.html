@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 كاشف R وتجزئة الضربات - محمد الشيخ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --secondary: #FF5722;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --detector: #9C27B0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+        
+        nav {
+            background: #222;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background: var(--detector);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        section h2 {
+            color: var(--detector);
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--detector);
+            padding-bottom: 0.8rem;
+            font-size: 2rem;
+        }
+        
+        section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        section p {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border-left: 5px solid var(--detector);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-left: 5px solid var(--detector);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box h4 {
+            color: var(--detector);
+            margin-bottom: 0.8rem;
+        }
+        
+        .algorithm-step {
+            background: white;
+            border: 2px solid var(--detector);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+        }
+        
+        .algorithm-step h4 {
+            color: var(--detector);
+            margin-bottom: 0.8rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--detector);
+            color: white;
+            padding: 1rem;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--detector);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        
+        .flow-diagram {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, var(--detector) 0%, #7B1FA2 100%);
+            color: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .flow-arrow {
+            color: var(--detector);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: var(--detector);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>🔍 كاشف R وتجزئة الضربات</h1>
+        <p>R-Peak Detection and Beat Segmentation</p>
+        <p style="font-size: 0.95rem; margin-top: 1rem;">من أطروحة محمد الشيخ - DL-CIDEA</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#overview">📋 نظرة عامة</a>
+        <a href="#algorithm">🔬 خوارزمية Pan-Tompkins</a>
+        <a href="#steps">📊 خطوات المعالجة</a>
+        <a href="#code">💻 الكود</a>
+        <a href="#features">✨ المميزات</a>
+        <a href="#usage">🚀 الاستخدام</a>
+        <a href="thesis_viewer.html">📚 العودة للأطروحة</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>📋 نظرة عامة على البرنامج</h2>
+            
+            <div class="highlight-box">
+                <h4>🎯 الهدف:</h4>
+                <p>كشف نقاط R في إشارات ECG وتجزئة الضربات القلبية بدقة عالية باستخدام خوارزمية Pan-Tompkins</p>
+            </div>
+            
+            <h3>المميزات الرئيسية:</h3>
+            <ul style="margin: 1rem 0; padding-right: 2rem;">
+                <li>✅ <strong>كشف دقيق:</strong> كشف نقاط R باستخدام خوارزمية Pan-Tompkins المشهورة</li>
+                <li>✅ <strong>تجزئة الضربات:</strong> استخراج كل ضربة قلبية حول نقطة R</li>
+                <li>✅ <strong>معالجة متعددة الإشارات:</strong> دعم 7 إشارات مختلفة</li>
+                <li>✅ <strong>حفظ منظم:</strong> حفظ الضربات في ملفات CSV منفصلة</li>
+                <li>✅ <strong>معالجة دفعات:</strong> معالجة عدة ملفات ECG تلقائياً</li>
+                <li>✅ <strong>تصفية ذكية:</strong> تصفية الضربات بناءً على التعليقات</li>
+            </ul>
+            
+            <h3>الإشارات المدعومة:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الإشارة</th>
+                        <th>الاختصار</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lead II</td>
+                        <td>II</td>
+                        <td>الإشارة الأساسية</td>
+                    </tr>
+                    <tr>
+                        <td>Lead III</td>
+                        <td>III</td>
+                        <td>إشارة ثانوية</td>
+                    </tr>
+                    <tr>
+                        <td>aVF</td>
+                        <td>AVF</td>
+                        <td>إشارة معززة</td>
+                    </tr>
+                    <tr>
+                        <td>MLII</td>
+                        <td>MLII</td>
+                        <td>Modified Lead II</td>
+                    </tr>
+                    <tr>
+                        <td>D2</td>
+                        <td>D2</td>
+                        <td>Derived Lead 2</td>
+                    </tr>
+                    <tr>
+                        <td>D3</td>
+                        <td>D3</td>
+                        <td>Derived Lead 3</td>
+                    </tr>
+                    <tr>
+                        <td>MLIII</td>
+                        <td>MLIII</td>
+                        <td>Modified Lead III</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Algorithm Section -->
+        <section id="algorithm">
+            <h2>🔬 خوارزمية Pan-Tompkins</h2>
+            
+            <div class="highlight-box">
+                <h4>📖 مقدمة:</h4>
+                <p>خوارزمية Pan-Tompkins هي واحدة من أشهر الخوارزميات لكشف نقاط R في إشارات ECG. تم تطويرها عام 1985 وتتميز بدقة عالية وسرعة معالجة ممتازة.</p>
+            </div>
+            
+            <div class="flow-diagram">
+                <h3>خطوات الخوارزمية:</h3>
+                
+                <div class="flow-step">📥 1. تصفية تمرير النطاق (Bandpass Filter)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-step">📈 2. الاشتقاق (Derivative)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-step">⚡ 3. التربيع (Squaring)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-step">🔄 4. تكامل النافذة المتحركة (Moving Window Integration)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-step">🎯 5. تحديد الحد الأدنى (Thresholding)</div>
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-step">✅ 6. تحسين النتائج (Refinement)</div>
+            </div>
+            
+            <h3>تفاصيل كل خطوة:</h3>
+            
+            <div class="algorithm-step">
+                <h4>1️⃣ تصفية تمرير النطاق (Bandpass Filter)</h4>
+                <p><strong>الغرض:</strong> إزالة الضوضاء والتشويهات</p>
+                <p><strong>النطاق:</strong> 0.5 - 50 Hz</p>
+                <p><strong>الترتيب:</strong> 1</p>
+                <p><strong>الصيغة:</strong> استخدام مرشح Butterworth</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>2️⃣ الاشتقاق (Derivative)</h4>
+                <p><strong>الغرض:</strong> تحديد معدل التغيير في الإشارة</p>
+                <p><strong>الطريقة:</strong> استخدام np.gradient()</p>
+                <p><strong>الفائدة:</strong> تعزيز الانتقالات الحادة (مثل R peak)</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>3️⃣ التربيع (Squaring)</h4>
+                <p><strong>الغرض:</strong> تضخيم القيم الكبيرة وتقليل الضوضاء</p>
+                <p><strong>الصيغة:</strong> squared = diff²</p>
+                <p><strong>الفائدة:</strong> جعل R peaks أكثر وضوحاً</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>4️⃣ تكامل النافذة المتحركة (Moving Window Integration)</h4>
+                <p><strong>الغرض:</strong> تجميع المعلومات على فترة زمنية</p>
+                <p><strong>حجم النافذة:</strong> 150 ms (0.15 * fs)</p>
+                <p><strong>الطريقة:</strong> استخدام np.convolve()</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>5️⃣ تحديد الحد الأدنى (Thresholding)</h4>
+                <p><strong>الحد:</strong> mean(integrated) × 1.2</p>
+                <p><strong>الغرض:</strong> تحديد النقاط التي تتجاوز الحد</p>
+                <p><strong>النتيجة:</strong> قائمة بالنقاط المرشحة</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>6️⃣ تحسين النتائج (Refinement)</h4>
+                <p><strong>فترة الحماية:</strong> 200 ms (0.2 * fs)</p>
+                <p><strong>الغرض:</strong> تجنب كشف نفس الضربة مرتين</p>
+                <p><strong>التحسين:</strong> البحث عن الحد الأقصى المحلي</p>
+            </div>
+        </section>
+        
+        <!-- Processing Steps Section -->
+        <section id="steps">
+            <h2>📊 خطوات معالجة الملف</h2>
+            
+            <h3>1️⃣ تحميل الملف:</h3>
+            <div class="code-block">
+                <pre>record = wfdb.rdrecord(file_path)
+fs = record.fs  # تردد العينات
+p_signal = record.p_signal  # البيانات الخام</pre>
+            </div>
+            
+            <h3>2️⃣ كشف نقاط R:</h3>
+            <div class="code-block">
+                <pre>sig0 = record.p_signal[:, 0]
+r_peaks = pan_tompkins_detect(sig0, fs)</pre>
+            </div>
+            
+            <h3>3️⃣ تحميل التعليقات:</h3>
+            <div class="code-block">
+                <pre>ann = wfdb.rdann(file_path, "atr")
+ann_samples = ann.sample  # موقع التعليق
+ann_symbols = ann.symbol  # نوع التعليق</pre>
+            </div>
+            
+            <h3>4️⃣ تجزئة الضربات:</h3>
+            <div class="code-block">
+                <pre>for r_idx in r_peaks:
+    start = int(r_idx - 0.2 * fs)  # 200 ms قبل
+    end = int(r_idx + 0.6 * fs)    # 600 ms بعد
+    beat = signal[start:end]
+    time = np.linspace(-0.2, 0.6, len(beat))</pre>
+            </div>
+            
+            <h3>5️⃣ حفظ النتائج:</h3>
+            <div class="code-block">
+                <pre>df = pd.DataFrame({
+    "time (s)": time,
+    f"{lead} (mV)": beat
+})
+df.to_csv(output_path, index=False)</pre>
+            </div>
+            
+            <h3>معاملات المعالجة:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>المعامل</th>
+                        <th>القيمة</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lowcut</td>
+                        <td>0.5 Hz</td>
+                        <td>الحد الأدنى للتصفية</td>
+                    </tr>
+                    <tr>
+                        <td>Highcut</td>
+                        <td>50 Hz</td>
+                        <td>الحد الأقصى للتصفية</td>
+                    </tr>
+                    <tr>
+                        <td>Window Before</td>
+                        <td>-0.2 s</td>
+                        <td>الوقت قبل R peak</td>
+                    </tr>
+                    <tr>
+                        <td>Window After</td>
+                        <td>0.6 s</td>
+                        <td>الوقت بعد R peak</td>
+                    </tr>
+                    <tr>
+                        <td>Refractory Period</td>
+                        <td>200 ms</td>
+                        <td>الفترة بين الضربات</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Code Section -->
+        <section id="code">
+            <h2>💻 شرح الكود</h2>
+            
+            <h3>الدوال الرئيسية:</h3>
+            
+            <div class="algorithm-step">
+                <h4>bandpass_filter()</h4>
+                <p>تصفية الإشارة بنطاق 0.5-50 Hz</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>derivative()</h4>
+                <p>حساب مشتقة الإشارة</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>moving_window_integration()</h4>
+                <p>تطبيق نافذة متحركة على الإشارة</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>pan_tompkins_detect()</h4>
+                <p>الدالة الرئيسية لكشف R peaks</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>slice_beat()</h4>
+                <p>استخراج ضربة واحدة حول R peak</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>process_record()</h4>
+                <p>معالجة ملف ECG واحد كاملاً</p>
+            </div>
+            
+            <div class="algorithm-step">
+                <h4>process_folder()</h4>
+                <p>معالجة عدة ملفات من مجلد</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>📥 تحميل الملف الكامل:</h4>
+                <p>
+                    <a href="Mohammad_AlSheikh_R_Detector_Segmentation.py" class="btn btn-primary" download>⬇️ تحميل الكود الكامل</a>
+                </p>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features">
+            <h2>✨ المميزات المتقدمة</h2>
+            
+            <div class="highlight-box">
+                <h4>🎯 دقة عالية:</h4>
+                <p>خوارزمية Pan-Tompkins معروفة بدقتها العالية في كشف R peaks</p>
+                <p>معدل الكشف الصحيح: &gt;99% على البيانات النظيفة</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>⚡ سرعة سريعة:</h4>
+                <p>معالجة فعالة للإشارات الطويلة</p>
+                <p>يمكن معالجة ساعات من البيانات في دقائق</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>📊 معالجة متعددة الإشارات:</h4>
+                <p>دعم 7 إشارات مختلفة في نفس الوقت</p>
+                <p>حفظ كل إشارة في مجلد منفصل</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🔄 معالجة دفعات:</h4>
+                <p>معالجة عدة ملفات ECG تلقائياً</p>
+                <p>تنظيم النتائج بشكل منطقي</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>📝 حفظ منظم:</h4>
+                <p>حفظ كل ضربة في ملف CSV منفصل</p>
+                <p>تضمين الوقت والقيمة في كل ملف</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🎯 تصفية ذكية:</h4>
+                <p>تصفية الضربات بناءً على التعليقات (s, T, N)</p>
+                <p>فقط الضربات المهمة يتم معالجتها</p>
+            </div>
+        </section>
+        
+        <!-- Usage Section -->
+        <section id="usage">
+            <h2>🚀 الاستخدام</h2>
+            
+            <h3>المتطلبات:</h3>
+            <div class="code-block">
+                <pre>pip install numpy
+pip install wfdb
+pip install pandas
+pip install scipy</pre>
+            </div>
+            
+            <h3>الاستخدام الأساسي:</h3>
+            <div class="code-block">
+                <pre>from Mohammad_AlSheikh_R_Detector_Segmentation import process_folder
+
+# معالجة مجلد كامل
+folder = "/path/to/ecg/data"
+process_folder(folder, max_records=10)</pre>
+            </div>
+            
+            <h3>معالجة ملف واحد:</h3>
+            <div class="code-block">
+                <pre>from Mohammad_AlSheikh_R_Detector_Segmentation import process_record
+
+# معالجة ملف واحد
+process_record("/path/to/data", "record_name")</pre>
+            </div>
+            
+            <h3>كشف R peaks فقط:</h3>
+            <div class="code-block">
+                <pre>from Mohammad_AlSheikh_R_Detector_Segmentation import pan_tompkins_detect
+import wfdb
+
+# تحميل الملف
+record = wfdb.rdrecord("record_path")
+fs = record.fs
+signal = record.p_signal[:, 0]
+
+# كشف R peaks
+r_peaks = pan_tompkins_detect(signal, fs)
+print(f"Found {len(r_peaks)} R peaks")</pre>
+            </div>
+            
+            <h3>الإخراج المتوقع:</h3>
+            <div class="code-block">
+                <pre>▶ Processing record1...
+✅ Done!
+
+IncartBeats/
+├── II/
+│   ├── record1_beat000_N.csv
+│   ├── record1_beat001_T.csv
+│   └── ...
+├── III/
+│   ├── record1_beat000_N.csv
+│   └── ...
+└── ...</pre>
+            </div>
+            
+            <h3>محتوى ملف CSV:</h3>
+            <div class="code-block">
+                <pre>time (s),II (mV)
+-0.200000,0.123
+-0.199600,0.125
+-0.199200,0.128
+...
+0.599600,0.110
+0.600000,0.108</pre>
+            </div>
+            
+            <h3>النصائح والحيل:</h3>
+            <ul style="margin: 1rem 0; padding-right: 2rem;">
+                <li>✅ يمكن تعديل معاملات التصفية حسب الحاجة</li>
+                <li>✅ يمكن تغيير حجم النافذة (WINDOW)</li>
+                <li>✅ يمكن إضافة إشارات جديدة إلى TARGET_LEADS</li>
+                <li>✅ يمكن تغيير حد الثقة في الكشف</li>
+            </ul>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>🔍 كاشف R وتجزئة الضربات من أطروحة محمد الشيخ</p>
+        <p>© 2024-2025 - جامعة دمشق - قسم الهندسة الطبية</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="index.html">← العودة للموقع الرئيسي</a> | 
+            <a href="thesis_viewer.html">← عرض الأطروحة</a>
+        </p>
+    </footer>
+</body>
+</html>
