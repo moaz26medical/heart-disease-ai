@@ -242,6 +242,64 @@
             box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
         }
         
+        /* Team Section */
+        .team-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .team-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .team-member {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .member-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-member h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member p {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
         /* Stats */
         .stats {
             display: grid;
@@ -401,6 +459,35 @@
         </div>
         <p style="margin-top: 1rem; font-size: 0.9rem;">اكتمال المشروع: 100% ✅</p>
     </header>
+    
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <h2>👥 فريق المشروع</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-icon">👨‍💼</div>
+                    <h3>معاذ الميداني</h3>
+                    <p>مشرف المشروع</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👨‍💻</div>
+                    <h3>عز الدين خميس</h3>
+                    <p>مهندس البرمجيات</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👨‍🔬</div>
+                    <h3>محمود نور الدين</h3>
+                    <p>مهندس الأجهزة</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👨‍🎓</div>
+                    <h3>علي الشرش</h3>
+                    <p>مهندس البيانات</p>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- Navigation -->
     <nav>
