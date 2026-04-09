@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  ملف دائرة Proteus - نظام تشخيص أمراض القلب
+  Heart Disease Diagnosis System - Proteus Circuit
+  
+  المكونات الرئيسية:
+  1. Arduino Uno (Microcontroller)
+  2. AD8232 (ECG Sensor)
+  3. ADS1115 (16-bit ADC)
+  4. Raspberry Pi (Optional)
+  5. OLED Display (128x64)
+  6. Power Supply (5V, 3.3V)
+  
+  التاريخ: 9 أبريل 2026
+  الحالة: جاهز للاختبار
+-->
+
+<PROTEUS_PROJECT>
+    <PROJECT_INFO>
+        <NAME>Heart Disease Diagnosis System</NAME>
+        <AUTHOR>Moaz Al-Midani Team</AUTHOR>
+        <DATE>2026-04-09</DATE>
+        <VERSION>1.0</VERSION>
+        <DESCRIPTION>نظام متكامل لتشخيص أمراض القلب باستخدام حساس ECG وذكاء اصطناعي</DESCRIPTION>
+    </PROJECT_INFO>
+
+    <!-- المكونات الإلكترونية -->
+    <COMPONENTS>
+        <!-- 1. Arduino Uno -->
+        <COMPONENT>
+            <ID>U1</ID>
+            <NAME>Arduino Uno</NAME>
+            <REFERENCE>ARDUINO_UNO</REFERENCE>
+            <POSITION>X=100, Y=200</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>Microcontroller - معالج دقيق</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="GND" TYPE="GND"/>
+                <PIN NUMBER="2" NAME="5V" TYPE="POWER"/>
+                <PIN NUMBER="3" NAME="3.3V" TYPE="POWER"/>
+                <PIN NUMBER="4" NAME="A0" TYPE="ANALOG_INPUT"/>
+                <PIN NUMBER="5" NAME="A1" TYPE="ANALOG_INPUT"/>
+                <PIN NUMBER="6" NAME="D0" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="7" NAME="D1" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="8" NAME="D2" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="9" NAME="D3" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="10" NAME="D4" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="11" NAME="D5" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="12" NAME="D6" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="13" NAME="D7" TYPE="DIGITAL_IO"/>
+                <PIN NUMBER="14" NAME="SDA" TYPE="I2C"/>
+                <PIN NUMBER="15" NAME="SCL" TYPE="I2C"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 2. AD8232 ECG Sensor -->
+        <COMPONENT>
+            <ID>U2</ID>
+            <NAME>AD8232 ECG Sensor</NAME>
+            <REFERENCE>AD8232</REFERENCE>
+            <POSITION>X=400, Y=200</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>حساس ECG - قراءة إشارات القلب</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="GND" TYPE="GND"/>
+                <PIN NUMBER="2" NAME="3.3V" TYPE="POWER"/>
+                <PIN NUMBER="3" NAME="OUTPUT" TYPE="ANALOG_OUTPUT"/>
+                <PIN NUMBER="4" NAME="LO+" TYPE="DIGITAL_INPUT"/>
+                <PIN NUMBER="5" NAME="LO-" TYPE="DIGITAL_INPUT"/>
+                <PIN NUMBER="6" NAME="SDN" TYPE="DIGITAL_INPUT"/>
+                <PIN NUMBER="7" NAME="RA" TYPE="ELECTRODE"/>
+                <PIN NUMBER="8" NAME="LA" TYPE="ELECTRODE"/>
+                <PIN NUMBER="9" NAME="LL" TYPE="ELECTRODE"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 3. ADS1115 16-bit ADC -->
+        <COMPONENT>
+            <ID>U3</ID>
+            <NAME>ADS1115 ADC</NAME>
+            <REFERENCE>ADS1115</REFERENCE>
+            <POSITION>X=300, Y=400</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>محول رقمي 16-bit - تحويل الإشارة التناظرية</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="GND" TYPE="GND"/>
+                <PIN NUMBER="2" NAME="VDD" TYPE="POWER"/>
+                <PIN NUMBER="3" NAME="SCL" TYPE="I2C"/>
+                <PIN NUMBER="4" NAME="SDA" TYPE="I2C"/>
+                <PIN NUMBER="5" NAME="ADDR" TYPE="DIGITAL_INPUT"/>
+                <PIN NUMBER="6" NAME="ALRT" TYPE="DIGITAL_OUTPUT"/>
+                <PIN NUMBER="7" NAME="A0" TYPE="ANALOG_INPUT"/>
+                <PIN NUMBER="8" NAME="A1" TYPE="ANALOG_INPUT"/>
+                <PIN NUMBER="9" NAME="A2" TYPE="ANALOG_INPUT"/>
+                <PIN NUMBER="10" NAME="A3" TYPE="ANALOG_INPUT"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 4. OLED Display 128x64 -->
+        <COMPONENT>
+            <ID>U4</ID>
+            <NAME>OLED Display 128x64</NAME>
+            <REFERENCE>OLED_128x64</REFERENCE>
+            <POSITION>X=600, Y=200</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>شاشة OLED - عرض النتائج</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="GND" TYPE="GND"/>
+                <PIN NUMBER="2" NAME="VDD" TYPE="POWER"/>
+                <PIN NUMBER="3" NAME="SCL" TYPE="I2C"/>
+                <PIN NUMBER="4" NAME="SDA" TYPE="I2C"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 5. Power Supply 5V -->
+        <COMPONENT>
+            <ID>PS1</ID>
+            <NAME>Power Supply 5V</NAME>
+            <REFERENCE>PSU_5V</REFERENCE>
+            <POSITION>X=50, Y=100</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مصدر الطاقة 5V</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="+" TYPE="POWER"/>
+                <PIN NUMBER="2" NAME="-" TYPE="GND"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 6. Power Supply 3.3V -->
+        <COMPONENT>
+            <ID>PS2</ID>
+            <NAME>Power Supply 3.3V</NAME>
+            <REFERENCE>PSU_3V3</REFERENCE>
+            <POSITION>X=50, Y=150</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مصدر الطاقة 3.3V</DESCRIPTION>
+            <PINS>
+                <PIN NUMBER="1" NAME="+" TYPE="POWER"/>
+                <PIN NUMBER="2" NAME="-" TYPE="GND"/>
+            </PINS>
+        </COMPONENT>
+
+        <!-- 7. Capacitors -->
+        <COMPONENT>
+            <ID>C1</ID>
+            <NAME>Capacitor 100nF</NAME>
+            <REFERENCE>C_100nF</REFERENCE>
+            <POSITION>X=200, Y=150</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مكثف تنعيم 100nF</DESCRIPTION>
+        </COMPONENT>
+
+        <COMPONENT>
+            <ID>C2</ID>
+            <NAME>Capacitor 10uF</NAME>
+            <REFERENCE>C_10uF</REFERENCE>
+            <POSITION>X=200, Y=180</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مكثف تنعيم 10uF</DESCRIPTION>
+        </COMPONENT>
+
+        <!-- 8. Resistors -->
+        <COMPONENT>
+            <ID>R1</ID>
+            <NAME>Resistor 10k</NAME>
+            <REFERENCE>R_10k</REFERENCE>
+            <POSITION>X=250, Y=150</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مقاومة 10k - Pull-up</DESCRIPTION>
+        </COMPONENT>
+
+        <COMPONENT>
+            <ID>R2</ID>
+            <NAME>Resistor 10k</NAME>
+            <REFERENCE>R_10k</REFERENCE>
+            <POSITION>X=250, Y=180</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مقاومة 10k - Pull-up</DESCRIPTION>
+        </COMPONENT>
+
+        <!-- 9. LED Indicators -->
+        <COMPONENT>
+            <ID>LED1</ID>
+            <NAME>LED Red</NAME>
+            <REFERENCE>LED_RED</REFERENCE>
+            <POSITION>X=700, Y=100</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مؤشر LED أحمر - خطأ/تحذير</DESCRIPTION>
+        </COMPONENT>
+
+        <COMPONENT>
+            <ID>LED2</ID>
+            <NAME>LED Green</NAME>
+            <REFERENCE>LED_GREEN</REFERENCE>
+            <POSITION>X=700, Y=130</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>مؤشر LED أخضر - عمل طبيعي</DESCRIPTION>
+        </COMPONENT>
+
+        <!-- 10. Electrodes -->
+        <COMPONENT>
+            <ID>ELEC1</ID>
+            <NAME>Electrode RA</NAME>
+            <REFERENCE>ELECTRODE_RA</REFERENCE>
+            <POSITION>X=450, Y=350</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>قطب اليد اليمنى (Right Arm)</DESCRIPTION>
+        </COMPONENT>
+
+        <COMPONENT>
+            <ID>ELEC2</ID>
+            <NAME>Electrode LA</NAME>
+            <REFERENCE>ELECTRODE_LA</REFERENCE>
+            <POSITION>X=500, Y=350</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>قطب اليد اليسرى (Left Arm)</DESCRIPTION>
+        </COMPONENT>
+
+        <COMPONENT>
+            <ID>ELEC3</ID>
+            <NAME>Electrode LL</NAME>
+            <REFERENCE>ELECTRODE_LL</REFERENCE>
+            <POSITION>X=550, Y=350</POSITION>
+            <ROTATION>0</ROTATION>
+            <DESCRIPTION>قطب الرجل اليسرى (Left Leg)</DESCRIPTION>
+        </COMPONENT>
+    </COMPONENTS>
+
+    <!-- الأسلاك والتوصيلات -->
+    <CONNECTIONS>
+        <!-- Power Connections -->
+        <CONNECTION FROM="PS1:+" TO="U1:5V" WIRE_COLOR="RED"/>
+        <CONNECTION FROM="PS2:+" TO="U2:3.3V" WIRE_COLOR="RED"/>
+        <CONNECTION FROM="PS2:+" TO="U3:VDD" WIRE_COLOR="RED"/>
+        <CONNECTION FROM="PS2:+" TO="U4:VDD" WIRE_COLOR="RED"/>
+
+        <!-- Ground Connections -->
+        <CONNECTION FROM="PS1:-" TO="U1:GND" WIRE_COLOR="BLACK"/>
+        <CONNECTION FROM="PS2:-" TO="U2:GND" WIRE_COLOR="BLACK"/>
+        <CONNECTION FROM="PS2:-" TO="U3:GND" WIRE_COLOR="BLACK"/>
+        <CONNECTION FROM="PS2:-" TO="U4:GND" WIRE_COLOR="BLACK"/>
+
+        <!-- AD8232 to Arduino -->
+        <CONNECTION FROM="U2:OUTPUT" TO="U1:A0" WIRE_COLOR="YELLOW" LABEL="ECG Signal"/>
+
+        <!-- AD8232 LO Pins to Arduino -->
+        <CONNECTION FROM="U2:LO+" TO="U1:D2" WIRE_COLOR="ORANGE" LABEL="LO+"/>
+        <CONNECTION FROM="U2:LO-" TO="U1:D3" WIRE_COLOR="ORANGE" LABEL="LO-"/>
+
+        <!-- AD8232 SDN Pin -->
+        <CONNECTION FROM="U2:SDN" TO="U1:D4" WIRE_COLOR="PURPLE" LABEL="Shutdown"/>
+
+        <!-- I2C Connections -->
+        <CONNECTION FROM="U1:SDA" TO="U3:SDA" WIRE_COLOR="GREEN" LABEL="SDA"/>
+        <CONNECTION FROM="U1:SCL" TO="U3:SCL" WIRE_COLOR="BLUE" LABEL="SCL"/>
+        <CONNECTION FROM="U1:SDA" TO="U4:SDA" WIRE_COLOR="GREEN" LABEL="SDA"/>
+        <CONNECTION FROM="U1:SCL" TO="U4:SCL" WIRE_COLOR="BLUE" LABEL="SCL"/>
+
+        <!-- ADS1115 Analog Inputs -->
+        <CONNECTION FROM="U2:OUTPUT" TO="U3:A0" WIRE_COLOR="YELLOW" LABEL="ECG Input"/>
+
+        <!-- LED Connections -->
+        <CONNECTION FROM="U1:D5" TO="LED1" WIRE_COLOR="RED" LABEL="Error LED"/>
+        <CONNECTION FROM="U1:D6" TO="LED2" WIRE_COLOR="GREEN" LABEL="Status LED"/>
+
+        <!-- Electrode Connections -->
+        <CONNECTION FROM="U2:RA" TO="ELEC1" WIRE_COLOR="RED" LABEL="RA"/>
+        <CONNECTION FROM="U2:LA" TO="ELEC2" WIRE_COLOR="YELLOW" LABEL="LA"/>
+        <CONNECTION FROM="U2:LL" TO="ELEC3" WIRE_COLOR="BLACK" LABEL="LL"/>
+
+        <!-- Pull-up Resistors for I2C -->
+        <CONNECTION FROM="R1" TO="U1:SDA" WIRE_COLOR="GREEN"/>
+        <CONNECTION FROM="R2" TO="U1:SCL" WIRE_COLOR="BLUE"/>
+
+        <!-- Decoupling Capacitors -->
+        <CONNECTION FROM="C1" TO="U2:3.3V" WIRE_COLOR="RED"/>
+        <CONNECTION FROM="C1" TO="U2:GND" WIRE_COLOR="BLACK"/>
+        <CONNECTION FROM="C2" TO="U3:VDD" WIRE_COLOR="RED"/>
+        <CONNECTION FROM="C2" TO="U3:GND" WIRE_COLOR="BLACK"/>
+    </CONNECTIONS>
+
+    <!-- معلومات التوصيل -->
+    <WIRING_GUIDE>
+        <SECTION NAME="Arduino Pins">
+            <PIN NAME="A0" FUNCTION="ECG Signal Input from AD8232"/>
+            <PIN NAME="D2" FUNCTION="LO+ from AD8232"/>
+            <PIN NAME="D3" FUNCTION="LO- from AD8232"/>
+            <PIN NAME="D4" FUNCTION="Shutdown from AD8232"/>
+            <PIN NAME="D5" FUNCTION="Error LED"/>
+            <PIN NAME="D6" FUNCTION="Status LED"/>
+            <PIN NAME="SDA" FUNCTION="I2C Data (ADS1115, OLED)"/>
+            <PIN NAME="SCL" FUNCTION="I2C Clock (ADS1115, OLED)"/>
+        </SECTION>
+
+        <SECTION NAME="AD8232 Connections">
+            <CONNECTION FROM="AD8232 OUTPUT" TO="Arduino A0" DESCRIPTION="ECG signal"/>
+            <CONNECTION FROM="AD8232 LO+" TO="Arduino D2" DESCRIPTION="Lead off detection"/>
+            <CONNECTION FROM="AD8232 LO-" TO="Arduino D3" DESCRIPTION="Lead off detection"/>
+            <CONNECTION FROM="AD8232 SDN" TO="Arduino D4" DESCRIPTION="Shutdown control"/>
+            <CONNECTION FROM="AD8232 RA" TO="Right Arm Electrode" DESCRIPTION="Right arm"/>
+            <CONNECTION FROM="AD8232 LA" TO="Left Arm Electrode" DESCRIPTION="Left arm"/>
+            <CONNECTION FROM="AD8232 LL" TO="Left Leg Electrode" DESCRIPTION="Left leg (reference)"/>
+        </SECTION>
+
+        <SECTION NAME="ADS1115 I2C">
+            <ADDRESS VALUE="0x48" DESCRIPTION="Default I2C address"/>
+            <CONNECTION FROM="ADS1115 SDA" TO="Arduino SDA" DESCRIPTION="I2C Data"/>
+            <CONNECTION FROM="ADS1115 SCL" TO="Arduino SCL" DESCRIPTION="I2C Clock"/>
+            <CONNECTION FROM="ADS1115 A0" TO="AD8232 OUTPUT" DESCRIPTION="Analog input"/>
+        </SECTION>
+
+        <SECTION NAME="OLED Display">
+            <ADDRESS VALUE="0x3C" DESCRIPTION="Default I2C address"/>
+            <CONNECTION FROM="OLED SDA" TO="Arduino SDA" DESCRIPTION="I2C Data"/>
+            <CONNECTION FROM="OLED SCL" TO="Arduino SCL" DESCRIPTION="I2C Clock"/>
+            <RESOLUTION VALUE="128x64" DESCRIPTION="Display resolution"/>
+        </SECTION>
+    </WIRING_GUIDE>
+
+    <!-- معلومات الاختبار -->
+    <TESTING_INFO>
+        <TEST NAME="Power Supply Test">
+            <STEP>1. تحقق من جهد 5V على Arduino</STEP>
+            <STEP>2. تحقق من جهد 3.3V على AD8232</STEP>
+            <STEP>3. تحقق من جهد 3.3V على ADS1115</STEP>
+            <EXPECTED_RESULT>جميع الجهود صحيحة</EXPECTED_RESULT>
+        </TEST>
+
+        <TEST NAME="I2C Communication Test">
+            <STEP>1. قم بتشغيل برنامج I2C Scanner</STEP>
+            <STEP>2. تحقق من وجود ADS1115 على العنوان 0x48</STEP>
+            <STEP>3. تحقق من وجود OLED على العنوان 0x3C</STEP>
+            <EXPECTED_RESULT>جميع الأجهزة موجودة</EXPECTED_RESULT>
+        </TEST>
+
+        <TEST NAME="ECG Signal Test">
+            <STEP>1. قم بتوصيل الأقطاب الثلاثة</STEP>
+            <STEP>2. قم بتشغيل برنامج قراءة ECG</STEP>
+            <STEP>3. تحقق من ظهور الإشارة على الشاشة</STEP>
+            <EXPECTED_RESULT>إشارة ECG واضحة ومستقرة</EXPECTED_RESULT>
+        </TEST>
+
+        <TEST NAME="LED Indicators Test">
+            <STEP>1. تحقق من إضاءة LED الأخضر (عمل طبيعي)</STEP>
+            <STEP>2. قم بفصل أحد الأقطاب</STEP>
+            <STEP>3. تحقق من إضاءة LED الأحمر (خطأ)</STEP>
+            <EXPECTED_RESULT>المؤشرات تعمل بشكل صحيح</EXPECTED_RESULT>
+        </TEST>
+
+        <TEST NAME="AI Prediction Test">
+            <STEP>1. جمع 200 عينة من إشارة ECG</STEP>
+            <STEP>2. تشغيل نموذج التنبؤ</STEP>
+            <STEP>3. عرض النتيجة على الشاشة</STEP>
+            <EXPECTED_RESULT>تنبؤ دقيق بحالة القلب</EXPECTED_RESULT>
+        </TEST>
+    </TESTING_INFO>
+
+    <!-- ملاحظات مهمة -->
+    <NOTES>
+        <NOTE priority="HIGH">
+            تأكد من توصيل الأقطاب الثلاثة بشكل صحيح:
+            - RA (Right Arm): اليد اليمنى
+            - LA (Left Arm): اليد اليسرى
+            - LL (Left Leg): الرجل اليسرى (مرجع)
+        </NOTE>
+        
+        <NOTE priority="HIGH">
+            استخدم كابلات عالية الجودة لتجنب التداخل الكهرومغناطيسي
+        </NOTE>
+        
+        <NOTE priority="MEDIUM">
+            تأكد من أن جميع التوصيلات آمنة وخالية من الاهتزاز
+        </NOTE>
+        
+        <NOTE priority="MEDIUM">
+            استخدم مصدر طاقة مستقر لتجنب تقلبات الجهد
+        </NOTE>
+        
+        <NOTE priority="LOW">
+            يمكن إضافة مكثفات إضافية لتحسين الاستقرار
+        </NOTE>
+    </NOTES>
+
+    <!-- معلومات الملف -->
+    <FILE_INFO>
+        <CREATED>2026-04-09</CREATED>
+        <MODIFIED>2026-04-09</MODIFIED>
+        <VERSION>1.0</VERSION>
+        <STATUS>Ready for Testing</STATUS>
+        <COMPATIBILITY>Proteus 8.x and above</COMPATIBILITY>
+    </FILE_INFO>
+</PROTEUS_PROJECT>
