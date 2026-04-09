@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 محاكاة المشروع على Proteus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --secondary: #FF5722;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --proteus: #9C27B0;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background: var(--proteus);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        section h2 {
+            color: var(--proteus);
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--proteus);
+            padding-bottom: 0.8rem;
+            font-size: 2rem;
+        }
+        
+        section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-left: 5px solid var(--proteus);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(156, 39, 176, 0.2);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--proteus);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--proteus);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+            border-left: 5px solid var(--proteus);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box h4 {
+            color: var(--proteus);
+            margin-bottom: 0.8rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: var(--proteus);
+            color: white;
+            padding: 1.2rem;
+            text-align: right;
+            font-weight: 600;
+            border: 2px solid var(--proteus);
+        }
+        
+        table td {
+            padding: 1.2rem;
+            border: 1px solid #eee;
+            text-align: right;
+        }
+        
+        table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .circuit-diagram {
+            background: #f9f9f9;
+            border: 2px dashed var(--proteus);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .circuit-diagram p {
+            color: #999;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .code-block code {
+            color: #ce9178;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--proteus);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--proteus);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 20px;
+            width: 4px;
+            height: 100%;
+            background: var(--proteus);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-item h4 {
+            color: var(--proteus);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: var(--proteus);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>🔬 محاكاة المشروع على Proteus</h1>
+        <p>اختبار الدوائر والأكواس قبل التطبيق على أرض الواقع</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#overview">📋 نظرة عامة</a>
+        <a href="#requirements">📦 المتطلبات</a>
+        <a href="#circuit">🔌 الدائرة الكهربائية</a>
+        <a href="#steps">🚀 خطوات المحاكاة</a>
+        <a href="#testing">🧪 الاختبار</a>
+        <a href="#troubleshooting">🔧 حل المشاكل</a>
+        <a href="index.html">← العودة</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>📋 نظرة عامة على المحاكاة</h2>
+            
+            <p>قبل تطبيق المشروع على أرض الواقع، نقوم بمحاكاة كاملة على برنامج Proteus لاختبار:</p>
+            
+            <ul style="margin: 1.5rem 0; padding-right: 2rem;">
+                <li>✅ توصيل الأجهزة والقطع الإلكترونية</li>
+                <li>✅ كود الأردوينو والمنطق</li>
+                <li>✅ قراءة الإشارات والبيانات</li>
+                <li>✅ التواصل بين المكونات</li>
+                <li>✅ الأداء والاستقرار</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h4>💡 فوائد المحاكاة على Proteus:</h4>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>🎯 اختبار الدائرة قبل الشراء</li>
+                    <li>🎯 توفير الوقت والمال</li>
+                    <li>🎯 اكتشاف الأخطاء مبكراً</li>
+                    <li>🎯 تحسين التصميم</li>
+                    <li>🎯 توثيق الدائرة بشكل دقيق</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Requirements Section -->
+        <section id="requirements">
+            <h2>📦 المتطلبات</h2>
+            
+            <h3>البرامج المطلوبة:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>البرنامج</th>
+                        <th>الإصدار</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Proteus Design Suite</strong></td>
+                        <td>8.10+</td>
+                        <td>برنامج المحاكاة الرئيسي</td>
+                    </tr>
+                    <tr>
+                        <td>Arduino IDE</td>
+                        <td>1.8.13+</td>
+                        <td>لكتابة وتجميع الأكواس</td>
+                    </tr>
+                    <tr>
+                        <td>VS Code</td>
+                        <td>أحدث إصدار</td>
+                        <td>محرر نصوص متقدم</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>المكونات المطلوبة (في المحاكاة):</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>المكون</th>
+                        <th>الكمية</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Arduino UNO</strong></td>
+                        <td>1</td>
+                        <td>لوحة التحكم الرئيسية</td>
+                    </tr>
+                    <tr>
+                        <td>AD8232</td>
+                        <td>1</td>
+                        <td>حساس ECG</td>
+                    </tr>
+                    <tr>
+                        <td>أسلاك توصيل</td>
+                        <td>متعدد</td>
+                        <td>للتوصيل بين المكونات</td>
+                    </tr>
+                    <tr>
+                        <td>مقاومات</td>
+                        <td>متعدد</td>
+                        <td>حسب متطلبات الدائرة</td>
+                    </tr>
+                    <tr>
+                        <td>مكثفات</td>
+                        <td>متعدد</td>
+                        <td>لتنقية الإشارة</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Circuit Section -->
+        <section id="circuit">
+            <h2>🔌 الدائرة الكهربائية</h2>
+            
+            <h3>توصيل المكونات:</h3>
+            
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4>توصيل AD8232 بـ Arduino</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>AD8232</th>
+                            <th>Arduino</th>
+                            <th>الوصف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GND</td>
+                            <td>GND</td>
+                            <td>الأرضي</td>
+                        </tr>
+                        <tr>
+                            <td>3.3V</td>
+                            <td>3.3V</td>
+                            <td>التغذية</td>
+                        </tr>
+                        <tr>
+                            <td>OUT</td>
+                            <td>A0</td>
+                            <td>الإشارة التناظرية</td>
+                        </tr>
+                        <tr>
+                            <td>LO-</td>
+                            <td>Pin 10</td>
+                            <td>كشف فقدان الاتصال</td>
+                        </tr>
+                        <tr>
+                            <td>LO+</td>
+                            <td>Pin 11</td>
+                            <td>كشف فقدان الاتصال</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="circuit-diagram">
+                <p>📐 رسم الدائرة الكهربائية</p>
+                <p style="font-size: 0.9rem; color: #666;">يمكنك رسم الدائرة في Proteus باستخدام المكونات المتاحة</p>
+                <a href="#" class="btn btn-primary">📥 تحميل ملف الدائرة</a>
+            </div>
+        </section>
+        
+        <!-- Steps Section -->
+        <section id="steps">
+            <h2>🚀 خطوات المحاكاة</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>الخطوة 1: تثبيت Proteus</h4>
+                    <p>قم بتحميل وتثبيت Proteus Design Suite من الموقع الرسمي</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>اذهب إلى: www.labcenter.com</li>
+                        <li>حمّل أحدث إصدار</li>
+                        <li>اتبع خطوات التثبيت</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 2: إنشاء مشروع جديد</h4>
+                    <p>افتح Proteus وأنشئ مشروع جديد</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>File → New Project</li>
+                        <li>اختر مسار المشروع</li>
+                        <li>اسم المشروع: "Heart_Disease_ECG"</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 3: إضافة المكونات</h4>
+                    <p>أضف المكونات المطلوبة من المكتبة</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>اضغط على "P" لفتح نافذة المكونات</li>
+                        <li>ابحث عن "ARDUINO"</li>
+                        <li>أضف Arduino UNO</li>
+                        <li>ابحث عن "AD8232" وأضفه</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 4: توصيل المكونات</h4>
+                    <p>وصّل المكونات حسب الرسم البياني</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>استخدم الأسلاك الحمراء للتغذية</li>
+                        <li>استخدم الأسلاك السوداء للأرضي</li>
+                        <li>استخدم الأسلاك الملونة للإشارات</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 5: تحميل الكود</h4>
+                    <p>حمّل كود الأردوينو على المحاكاة</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>اضغط على Arduino UNO بزر الفأرة الأيمن</li>
+                        <li>اختر "Edit Properties"</li>
+                        <li>حدد ملف الكود (HEX)</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 6: إضافة محاكي الإشارة</h4>
+                    <p>أضف مولد إشارة لمحاكاة ECG</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>ابحث عن "SIGNAL GENERATOR"</li>
+                        <li>أضفه إلى الدائرة</li>
+                        <li>وصّله إلى دخل AD8232</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h4>الخطوة 7: بدء المحاكاة</h4>
+                    <p>شغّل المحاكاة واختبر النظام</p>
+                    <ul style="margin-top: 0.8rem; padding-right: 2rem;">
+                        <li>اضغط على "Run" (أو Spacebar)</li>
+                        <li>راقب الإشارات</li>
+                        <li>تحقق من النتائج</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testing Section -->
+        <section id="testing">
+            <h2>🧪 الاختبار والتحقق</h2>
+            
+            <h3>اختبارات يجب إجراؤها:</h3>
+            
+            <div class="step-card">
+                <h4>✅ اختبار التوصيل الكهربائي</h4>
+                <p>تحقق من أن جميع الاتصالات صحيحة</p>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>لا توجد أسلاك معطوبة</li>
+                    <li>جميع المكونات موصولة بشكل صحيح</li>
+                    <li>التغذية الكهربائية تصل إلى جميع المكونات</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <h4>✅ اختبار قراءة الإشارة</h4>
+                <p>تحقق من أن الحساس يقرأ الإشارة بشكل صحيح</p>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>الإشارة تصل إلى Arduino</li>
+                    <li>القيم المقروءة منطقية</li>
+                    <li>لا توجد تشويهات في الإشارة</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <h4>✅ اختبار معالجة البيانات</h4>
+                <p>تحقق من أن البيانات تُعالج بشكل صحيح</p>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>البيانات تُخزن بشكل صحيح</li>
+                    <li>الحسابات صحيحة</li>
+                    <li>النتائج منطقية</li>
+                </ul>
+            </div>
+            
+            <div class="step-card">
+                <h4>✅ اختبار الأداء</h4>
+                <p>تحقق من أداء النظام</p>
+                <ul style="margin-top: 1rem; padding-right: 2rem;">
+                    <li>السرعة كافية</li>
+                    <li>الاستقرار جيد</li>
+                    <li>لا توجد أخطاء في الكود</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Troubleshooting Section -->
+        <section id="troubleshooting">
+            <h2>🔧 حل المشاكل الشائعة</h2>
+            
+            <h3>المشكلة 1: الحساس لا يقرأ الإشارة</h3>
+            <div class="step-card">
+                <h4>الحل:</h4>
+                <ul style="padding-right: 2rem;">
+                    <li>تحقق من التوصيل بين AD8232 و Arduino</li>
+                    <li>تأكد من أن التغذية الكهربائية موصولة</li>
+                    <li>تحقق من أن المنفذ A0 موصول بشكل صحيح</li>
+                </ul>
+            </div>
+            
+            <h3>المشكلة 2: الإشارة مشوهة</h3>
+            <div class="step-card">
+                <h4>الحل:</h4>
+                <ul style="padding-right: 2rem;">
+                    <li>أضف مكثفات لتنقية الإشارة</li>
+                    <li>تحقق من أن الأسلاك بعيدة عن مصادر التشويش</li>
+                    <li>استخدم مقاومات بقيم صحيحة</li>
+                </ul>
+            </div>
+            
+            <h3>المشكلة 3: الكود لا يعمل</h3>
+            <div class="step-card">
+                <h4>الحل:</h4>
+                <ul style="padding-right: 2rem;">
+                    <li>تحقق من أن الكود مكتوب بشكل صحيح</li>
+                    <li>تأكد من أن المكتبات مثبتة</li>
+                    <li>تحقق من رسائل الخطأ في المترجم</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Next Steps Section -->
+        <section>
+            <h2>📈 الخطوات التالية</h2>
+            
+            <p>بعد نجاح المحاكاة على Proteus، ننتقل إلى المراحل التالية:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>المرحلة</th>
+                        <th>النسبة</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>محاكاة Proteus</strong></td>
+                        <td>✅ 10%</td>
+                        <td>اختبار الدائرة والكود</td>
+                    </tr>
+                    <tr>
+                        <td>تجميع الأجهزة</td>
+                        <td>⏳ 10%</td>
+                        <td>توصيل المكونات الحقيقية</td>
+                    </tr>
+                    <tr>
+                        <td>رفع الأكواد</td>
+                        <td>⏳ 10%</td>
+                        <td>تحميل الكود على الأردوينو</td>
+                    </tr>
+                    <tr>
+                        <td>الاختبار الحقيقي</td>
+                        <td>⏳ 15%</td>
+                        <td>اختبار مع بيانات حقيقية</td>
+                    </tr>
+                    <tr>
+                        <td>التحسينات</td>
+                        <td>⏳ 5%</td>
+                        <td>تحسين الأداء والاستقرار</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="index.html" class="btn btn-primary">← العودة للموقع الرئيسي</a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>🔬 محاكاة المشروع على Proteus</p>
+        <p>© 2026 - جميع الحقوق محفوظة</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="index.html">الموقع الرئيسي</a> | 
+            <a href="https://github.com/moaz26medical/heart-disease-ai" target="_blank">GitHub</a>
+        </p>
+    </footer>
+</body>
+</html>
