@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .heart-fill { fill: #e91e63; }
+      .heart-outline { stroke: #c2185b; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+  
+  <!-- Heart Shape -->
+  <path class="heart-fill" d="M50,85 C25,70 10,55 10,40 C10,28 18,20 28,20 C35,20 42,25 50,32 C58,25 65,20 72,20 C82,20 90,28 90,40 C90,55 75,70 50,85 Z"/>
+  
+  <!-- Shine effect -->
+  <ellipse cx="35" cy="35" rx="8" ry="10" fill="white" opacity="0.3"/>
+</svg>
