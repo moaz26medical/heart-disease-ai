@@ -363,149 +363,62 @@
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-        
-        .feature h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Footer */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: 70%; }
+        }
+
         footer {
-            background: rgba(0, 0, 0, 0.9);
+            background: #222;
             color: white;
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-        
-        footer p {
-            margin-bottom: 0.5rem;
-            color: #ddd;
+            margin-top: 4rem;
         }
         
         footer a {
             color: var(--primary);
             text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        footer a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-        
-        /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fillProgress {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            nav a {
-                margin: 0.5rem;
-                font-size: 0.9rem;
-            }
-            
-            section {
-                padding: 1.5rem;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
+            margin: 0 0.5rem;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <h1>💓 اقتباس الإشارات القلبية لتشخيص بعض الحالات المرضية</h1>
-        <p>نظام متكامل لتشخيص أمراض القلب باستخدام تقنيات الذكاء الاصطناعي والعتاد الإلكتروني</p>
+        <h1>🏥 اقتباس الإشارات القلبية لتشخيص بعض الحالات المرضية</h1>
+        <p>مشروع متكامل يجمع بين الهندسة الطبية والذكاء الاصطناعي لتشخيص أمراض القلب</p>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">اكتمال المشروع: 70% 🔄 (محاكاة Proteus - قبل التطبيق العملي)</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">حالة المشروع: 🔄 قيد التطوير (70%)</p>
     </header>
-    
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="team-container">
-            <h2>👥 فريق المشروع</h2>
-            <div class="team-members">
-                <div class="team-member">
-                    <div class="member-icon">👨‍💼</div>
-                    <h3>معاذ الميداني</h3>
-                    <p>مشرف المشروع</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👨‍💻</div>
-                    <h3>عز الدين خميس</h3>
-                    <p>مهندس البرمجيات</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👨‍🔬</div>
-                    <h3>محمود نور الدين</h3>
-                    <p>مهندس الأجهزة</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👨‍🎓</div>
-                    <h3>علي الشرش</h3>
-                    <p>مهندس البيانات</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+
     <!-- Navigation -->
     <nav>
-        <a href="#overview">نظرة عامة</a>
-        <a href="#features">المميزات</a>
-        <a href="#stats">الإحصائيات</a>
-        <a href="#files">الملفات</a>
-        <a href="#usage">الاستخدام</a>
-        <a href="#download">التحميل        <a href="#contact">📞 التواصل والدعم</a>
-        <span style="color: #666; margin: 0 0.5rem;">|</span>
-        <a href="comparison.html" style="font-weight: bold; color: #FF9800;">📊 المقارنة</a>
-        <span style="color: #666; margin: 0 0.5rem;">|</span>
-        <a href="mohammad_sheikh_hub.html" style="font-weight: bold; color: #4ECDC4;">📚 محمد الشيخ</a>
+        <a href="#overview">📋 نظرة عامة</a>
+        <a href="#features">✨ المميزات</a>
+        <a href="#stats">📊 النتائج</a>
+        <a href="#files">📁 الملفات</a>
+        <a href="#usage">🚀 الاستخدام</a>
+        <a href="#download">📥 التحميل</a>
+        <a href="#contact">📞 التواصل</a>
         <span style="color: #666; margin: 0 0.5rem;">|</span>
         <a href="proteus_simulation.html" style="font-weight: bold; color: #9C27B0;">🔬 محاكاة Proteus</a>
     </nav> 
+
     <!-- Main Content -->
     <div class="container">
         <!-- Overview Section -->
@@ -681,7 +594,7 @@
         
         <!-- Files Section -->
         <section id="files">
-            <h2>📁 الملفات والأكواس</h2>
+            <h2>📁 الملفات والأكواد</h2>
             
             <h3>البرامج الرئيسية:</h3>
             <table>
@@ -747,10 +660,6 @@
                         <td>دليل شامل بالعربية (محسّن)</td>
                     </tr>
                     <tr>
-                        <td>SETUP_GUIDE.md</td>
-                        <td>شرح مفصل لخطوات التثبيت</td>
-                    </tr>
-                    <tr>
                         <td>ARDUINO_SETUP.md</td>
                         <td>دليل توصيل الأردوينو والحساس</td>
                     </tr>
@@ -804,17 +713,6 @@
                 <h4>تشغيل البرنامج الرئيسي:</h4>
                 <p><code>python3 complete_system.py</code></p>
             </div>
-            
-            <h3>الخطوة 5: اختر من القائمة</h3>
-            <div class="card">
-                <h4>الخيارات:</h4>
-                <p>
-                    1️⃣ تدريب النموذج (المرة الأولى فقط)<br>
-                    2️⃣ قراءة البيانات من الأردوينو والتنبؤ<br>
-                    3️⃣ عرض النتائج المحفوظة<br>
-                    4️⃣ خروج
-                </p>
-            </div>
         </section>
         
         <!-- Download Section -->
@@ -859,215 +757,8 @@
                         <td>قاعدة البيانات</td>
                         <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/database_system.py" target="_blank">تحميل</a></td>
                     </tr>
-                    <tr>
-                        <td>أطروحة محمد الشيخ</td>
-                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/Mohammad_AlSheikh_Thesis.pdf" target="_blank">تحميل PDF</a></td>
-                    </tr>
-                    <tr>
-                        <td>العرض التقديمي</td>
-                        <td><a href="https://github.com/moaz26medical/heart-disease-ai/raw/main/DL-CIDEA_Presentation.pptx" target="_blank">تحميل PPTX</a></td>
-                    </tr>
                 </tbody>
             </table>
-        </section>
-        
-        <!-- Thesis Section -->
-        <section id="thesis">
-            <h2>📚 الأطروحة - مصدر الإلهام</h2>
-            
-            <div class="card">
-                <h4>🎓 أطروحة محمد الشيخ - DL-CIDEA</h4>
-                <p>أطروحة من السنة الماضية تتناول كشف الإقفار القلبي باستخدام التعلم العميق. تم استخدامها كمصدر إلهام لمشروعك الحالي.</p>
-                <p style="margin-top: 1rem;">
-                    <a href="thesis_viewer.html" class="btn btn-primary">📖 عرض الأطروحة</a>
-                    <a href="Mohammad_AlSheikh_Thesis.pdf" class="btn btn-secondary" download>⬇️ تحميل PDF</a>
-                </p>
-            </div>
-            
-            <h3>نقاط الاستوحاء:</h3>
-            <div class="card">
-                <h4>✅ استخدام حساس AD8232</h4>
-                <p>نفس الحساس المستخدم في الأطروحة لقراءة إشارات ECG</p>
-            </div>
-            <div class="card">
-                <h4>✅ معالجة الإشارات</h4>
-                <p>تقنيات تنظيف وتحسين جودة الإشارات</p>
-            </div>
-            <div class="card">
-                <h4>✅ استخلاص الميزات</h4>
-                <p>اختيار الميزات المهمة من إشارات ECG</p>
-            </div>
-            <div class="card">
-                <h4>✅ التعلم الآلي</h4>
-                <p>استخدام نماذج ذكية للتنبؤ بأمراض القلب</p>
-            </div>
-        </section>
-        
-        <!-- Deep Learning Model Section -->
-        <section id="deep-learning">
-            <h2>🤖 نموذج التعلم العميق - محمد الشيخ</h2>
-            
-            <div class="card">
-                <h4>🤖 نموذج CNN متقدم</h4>
-                <p>نموذج شبكة عصبية عميقة (CNN) من أطروحة محمد الشيخ لتحليل إشارات ECG بدقة عالية جداً.</p>
-                <p style="margin-top: 1rem;">
-                    <a href="deep_learning_guide.html" class="btn btn-primary">📖 عرض النموذج</a>
-                    <a href="Mohammad_AlSheikh_DeepLearningModel.py" class="btn btn-secondary" download>⬇️ تحميل الكود</a>
-                </p>
-            </div>
-            
-            <h3>مميزات النموذج:</h3>
-            <div class="card">
-                <h4>✅ معمارية CNN متقدمة</h4>
-                <p>3 طبقات تلافيف (Convolution) مع 200, 128, 64 فلتر</p>
-            </div>
-            <div class="card">
-                <h4>✅ تطبيع الدفعات (Batch Normalization)</h4>
-                <p>لتحسين استقرار التدريب والأداء</p>
-            </div>
-            <div class="card">
-                <h4>✅ تفعيل LeakyReLU</h4>
-                <p>لتجنب مشكلة الخلايا الميتة (Dead Neurons)</p>
-            </div>
-            <div class="card">
-                <h4>✅ Dropout لتقليل Overfitting</h4>
-                <p>بمعدل 50% لتحسين التعميم</p>
-            </div>
-            <div class="card">
-                <h4>✅ تحويل إلى TFLite</h4>
-                <p>لنشر على الأجهزة المحمولة</p>
-            </div>
-        </section>
-        
-        <!-- Raspberry Pi Section -->
-        <section id="raspberry-pi">
-            <h2>🍓 برنامج Raspberry Pi - محمد الشيخ</h2>
-            
-            <div class="card">
-                <h4>🍓 برنامج مراقبة ECG في الوقت الفعلي</h4>
-                <p>برنامج متكامل يعمل على Raspberry Pi لقراءة وتحليل إشارات ECG في الوقت الفعلي باستخدام نموذج التعلم العميق.</p>
-                <p style="margin-top: 1rem;">
-                    <a href="raspberry_pi_guide.html" class="btn btn-primary">📖 عرض البرنامج</a>
-                    <a href="Mohammad_AlSheikh_RaspberryPi.py" class="btn btn-secondary" download>⬇️ تحميل الكود</a>
-                </p>
-            </div>
-            
-            <h3>المميزات:</h3>
-            <div class="card">
-                <h4>✅ قراءة فعلية</h4>
-                <p>قراءة إشارات ECG بتردد 250 Hz من حساس AD8232 عبر ADS1115</p>
-            </div>
-            <div class="card">
-                <h4>✅ عرض مباشر</h4>
-                <p>رسم الإشارات على الشاشة في الوقت الفعلي باستخدام PyQtGraph</p>
-            </div>
-            <div class="card">
-                <h4>✅ تنبؤ ذكي</h4>
-                <p>استخدام نموذج TFLite للتنبؤ السريع والدقيق</p>
-            </div>
-            <div class="card">
-                <h4>✅ عرض OLED</h4>
-                <p>عرض النتائج والإحصائيات على شاشة OLED صغيرة</p>
-            </div>
-            <div class="card">
-                <h4>✅ إحصائيات</h4>
-                <p>حساب وعرض عدد كل نوع من الحالات</p>
-            </div>
-            <div class="card">
-                <h4>✅ ثلاث إشارات</h4>
-                <p>معالجة Lead II, Lead III, و aVF المحسوبة</p>
-            </div>
-        </section>
-        
-        <!-- R-Detector Section -->
-        <section id="r-detector">
-            <h2>🔍 كاشف R وتجزئة الضربات - محمد الشيخ</h2>
-            
-            <div class="card">
-                <h4>🔍 خوارزمية Pan-Tompkins لكشف R peaks</h4>
-                <p>برنامج متقدم لكشف نقاط R في إشارات ECG وتجزئة الضربات القلبية بدقة عالية جداً.</p>
-                <p style="margin-top: 1rem;">
-                    <a href="r_detector_guide.html" class="btn btn-primary">📖 عرض البرنامج</a>
-                    <a href="Mohammad_AlSheikh_R_Detector_Segmentation.py" class="btn btn-secondary" download>⬇️ تحميل الكود</a>
-                </p>
-            </div>
-            
-            <h3>المميزات:</h3>
-            <div class="card">
-                <h4>✅ خوارزمية Pan-Tompkins</h4>
-                <p>الخوارزمية الأشهر والأدق لكشف R peaks في ECG</p>
-            </div>
-            <div class="card">
-                <h4>✅ كشف دقيق</h4>
-                <p>معدل كشف صحيح &gt;99% على البيانات النظيفة</p>
-            </div>
-            <div class="card">
-                <h4>✅ تجزئة الضربات</h4>
-                <p>استخراج كل ضربة قلبية حول نقطة R بدقة</p>
-            </div>
-            <div class="card">
-                <h4>✅ معالجة متعددة الإشارات</h4>
-                <p>دعم 7 إشارات مختلفة (II, III, aVF, MLII, D2, D3, MLIII)</p>
-            </div>
-            <div class="card">
-                <h4>✅ معالجة دفعات</h4>
-                <p>معالجة عدة ملفات ECG تلقائياً</p>
-            </div>
-            <div class="card">
-                <h4>✅ حفظ منظم</h4>
-                <p>حفظ كل ضربة في ملف CSV منفصل مع الوقت والقيمة</p>
-            </div>
-        </section>
-        
-        <!-- Comparison Section -->
-        <section id="comparison">
-            <h2>📊 مقارنة المشروعين</h2>
-            
-            <div class="card">
-                <h4>📊 مقارنة شاملة بين العصيدة ومحمد الشيخ</h4>
-                <p>صفحة تفاعلية تقارن بين مشروع العصيدة (Atherosclerosis) وأطروحة محمد الشيخ (DL-CIDEA)، وتوضح كيف تطور مشروعك عن الأساس البحثي القوي.</p>
-                <p style="margin-top: 1rem;">
-                    <a href="comparison.html" class="btn btn-primary">📊 عرض المقارنة الكاملة</a>
-                </p>
-            </div>
-            
-            <h3>ملخص المقارنة:</h3>
-            <div class="card">
-                <h4>🫀 مشروع العصيدة</h4>
-                <p><strong>المرحلة:</strong> متقدمة - تطبيقات عملية</p>
-                <p><strong>المميزات:</strong> GUI متقدمة، قاعدة بيانات، نموذج هجين، موقع إلكتروني</p>
-                <p><strong>الدقة:</strong> 99.5%</p>
-            </div>
-            <div class="card">
-                <h4>🔬 مشروع محمد الشيخ</h4>
-                <p><strong>المرحلة:</strong> أساسية - بحثية</p>
-                <p><strong>المميزات:</strong> خوارزمية Pan-Tompkins، CNN، معالجة الإشارات</p>
-                <p><strong>الدقة:</strong> 96%</p>
-            </div>
-            
-            <h3>نقاط الاستوحاء:</h3>
-            <div class="card">
-                <h4>✅ ما تم استفادته من محمد الشيخ:</h4>
-                <ul style="margin-top: 1rem; padding-right: 2rem;">
-                    <li>خوارزمية Pan-Tompkins لكشف R peaks</li>
-                    <li>معمارية CNN للتعلم العميق</li>
-                    <li>معالجة الإشارات والتطبيع</li>
-                    <li>استخدام Raspberry Pi</li>
-                    <li>فكرة المراقبة الفعلية</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>✨ ما تم تحسينه في مشروعك:</h4>
-                <ul style="margin-top: 1rem; padding-right: 2rem;">
-                    <li>إضافة Arduino للقراءة الفعلية</li>
-                    <li>زيادة معدل العينات من 250 إلى 360 Hz</li>
-                    <li>استخراج 10 ميزات بدلاً من 7</li>
-                    <li>نموذج هجين (Random Forest + CNN)</li>
-                    <li>قاعدة بيانات SQLite متقدمة</li>
-                    <li>واجهة رسومية متطورة</li>
-                    <li>موقع إلكتروني شامل</li>
-                </ul>
-            </div>
         </section>
         
         <!-- Contact Section -->
@@ -1084,20 +775,10 @@
                 <p><a href="https://github.com/moaz26medical" target="_blank">https://github.com/moaz26medical</a></p>
             </div>
             
-            <div class="card">
-                <h4>💬 للأسئلة والاستفسارات</h4>
-                <p>تواصل عبر البريد الإلكتروني أو GitHub Issues</p>
-            </div>
-            
             <h3>معلومات المشروع:</h3>
             <div class="card">
                 <h4>📚 نوع المشروع</h4>
                 <p>مشروع السنة الخامسة - هندسة طبية</p>
-            </div>
-            
-            <div class="card">
-                <h4>📄 الترخيص</h4>
-                <p>مفتوح المصدر - متاح للاستخدام التعليمي والبحثي</p>
             </div>
             
             <div class="card">
@@ -1116,7 +797,7 @@
             <a href="mailto:moazsyria90@gmail.com">البريد الإلكتروني</a> | 
             <a href="#overview">العودة للأعلى</a>
         </p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">آخر تحديث: 9 أبريل 2026 | الحالة: 🔄 قيد التطوير - 70% (محاكاة Proteus)</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">آخر تحديث: 22 أبريل 2026 | الحالة: 🔄 قيد التطوير - 70%</p>
     </footer>
 </body>
 </html>
