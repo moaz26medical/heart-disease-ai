@@ -36,7 +36,7 @@
         header {
             background: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
@@ -165,65 +165,96 @@
             font-size: 0.95rem;
         }
         
-        /* Team Section */
+        /* Team Section - Modernized */
         .team-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 2.5rem;
+            background: white;
+            padding: 3rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             text-align: center;
+            border-top: 8px solid var(--primary);
         }
         
         .team-section h2 {
             color: var(--primary);
-            margin-bottom: 2rem;
-            border-bottom: 4px solid var(--primary);
-            display: inline-block;
-            padding-bottom: 0.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .supervisor-box {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-            border-top: 5px solid var(--secondary);
+            margin-bottom: 3rem;
+            border: 1px solid #eee;
+            display: inline-block;
+            min-width: 300px;
         }
 
         .supervisor-box h3 {
             color: var(--secondary);
             margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .supervisor-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 0;
         }
 
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
         }
 
         .member-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-            border-bottom: 4px solid var(--primary);
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
         }
 
         .member-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
         }
 
         .member-card h4 {
             color: var(--dark);
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
         .member-card p {
             color: var(--primary);
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 1rem;
             margin-bottom: 0;
             text-align: center;
         }
@@ -413,8 +444,8 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#overview">📋 نظرة عامة</a>
         <a href="#team">👥 فريق العمل</a>
+        <a href="#overview">📋 نظرة عامة</a>
         <a href="#features">✨ المميزات</a>
         <a href="#stats">📊 النتائج</a>
         <a href="#files">📁 الملفات</a>
@@ -427,6 +458,36 @@
 
     <!-- Main Content -->
     <div class="container">
+        
+        <!-- Team Section - MOVED TO TOP -->
+        <section id="team" class="team-section">
+            <h2>👥 فريق العمل</h2>
+            
+            <div class="supervisor-box">
+                <h3>👨‍🏫 إشراف الدكتور:</h3>
+                <p class="supervisor-name">أيمن الصابوني</p>
+            </div>
+
+            <div class="members-grid">
+                <div class="member-card">
+                    <h4>معاذ الميداني</h4>
+                    <p>مهندس طبي</p>
+                </div>
+                <div class="member-card">
+                    <h4>عزالدين خميس</h4>
+                    <p>مهندس طبي</p>
+                </div>
+                <div class="member-card">
+                    <h4>محمود نورالدين</h4>
+                    <p>مهندس طبي</p>
+                </div>
+                <div class="member-card">
+                    <h4>علي الشرش</h4>
+                    <p>مهندس طبي</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Overview Section -->
         <section id="overview">
             <h2>📋 نظرة عامة</h2>
@@ -464,35 +525,6 @@
                     <div class="feature-icon">📖</div>
                     <h3>التوثيق الشامل</h3>
                     <p>دليل كامل بالعربية والإنجليزية</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Section -->
-        <section id="team" class="team-section">
-            <h2>👥 فريق العمل</h2>
-            
-            <div class="supervisor-box">
-                <h3>👨‍🏫 إشراف الدكتور:</h3>
-                <p style="font-size: 1.5rem; font-weight: bold; color: var(--dark);">أيمن الصابوني</p>
-            </div>
-
-            <div class="members-grid">
-                <div class="member-card">
-                    <h4>معاذ الميداني</h4>
-                    <p>مهندس طبي</p>
-                </div>
-                <div class="member-card">
-                    <h4>عزالدين خميس</h4>
-                    <p>مهندس طبي</p>
-                </div>
-                <div class="member-card">
-                    <h4>محمود نورالدين</h4>
-                    <p>مهندس طبي</p>
-                </div>
-                <div class="member-card">
-                    <h4>علي الشرش</h4>
-                    <p>مهندس طبي</p>
                 </div>
             </div>
         </section>
@@ -830,7 +862,7 @@
         <p>
             <a href="https://github.com/moaz26medical/heart-disease-ai" target="_blank">GitHub</a> | 
             <a href="mailto:moazsyria90@gmail.com">البريد الإلكتروني</a> | 
-            <a href="#overview">العودة للأعلى</a>
+            <a href="#team">العودة للأعلى</a>
         </p>
         <p style="margin-top: 1rem; font-size: 0.9rem;">آخر تحديث: 22 أبريل 2026 | الحالة: 🔄 قيد التطوير - 70%</p>
     </footer>
